@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelaburan &amp; Persaraan | Jannah Financial</title>
+  <meta name="description" content="Rancang persaraan yang selesa dengan pelaburan Unit Trust dan PRS. Kira anggaran simpanan persaraan anda dan dapatkan konsultasi percuma.">
+  <meta property="og:title" content="Rancang persaraan anda bermula hari ini">
+  <meta property="og:description" content="Kira anggaran simpanan persaraan anda dengan Unit Trust & PRS, dan dapatkan konsultasi percuma.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://nuruljannah84.github.io/Iklan-UT-retirement/images/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGASI ===== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Utama</a>
+        <a href="perlindungan.html">Perlindungan</a>
+        <a href="persaraan.html" aria-current="page">Pelaburan &amp; Persaraan</a>
+        <a href="kerjaya.html">Kerjaya</a>
+        <a href="index.html#hubungi" class="btn btn-small">Konsultasi Percuma</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero page-hero grow">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Pelaburan &amp; Persaraan</p>
+          <h1>Bersara dengan tenang, bukan dengan risau.</h1>
+          <p class="lead">Simpanan KWSP sahaja mungkin tidak cukup untuk menampung 20 tahun atau lebih selepas bersara. Mulakan pelaburan Unit Trust dan PRS secara konsisten, dengan bimbingan perunding berlesen.</p>
+          <div class="hero-actions">
+            <a href="#kalkulator" class="btn">Kira Simpanan Saya</a>
+            <a href="#" class="btn btn-ghost" data-wa="Assalamualaikum, saya berminat nak tahu tentang perancangan persaraan.">WhatsApp Saya</a>
+          </div>
+          <ul class="trust">
+            <li>Perunding berdaftar FIMM</li>
+            <li>Pilihan dana patuh Syariah</li>
+            <li>Pelepasan cukai PRS</li>
+          </ul>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <p class="hc-label">Contoh: mula pada umur 30, RM300 sebulan</p>
+          <p class="hc-value" id="heroValue">RM —</p>
+          <p class="hc-sub">anggaran pada umur 60*</p>
+          <svg viewBox="0 0 300 120" class="hc-chart" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="currentColor" stop-opacity=".35"/>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,115 C60,110 110,100 160,82 C210,62 250,35 300,5 L300,120 L0,120 Z" fill="url(#g)"/>
+            <path d="M0,115 C60,110 110,100 160,82 C210,62 250,35 300,5" fill="none" stroke="currentColor" stroke-width="3"/>
+          </svg>
+          <p class="hc-foot">*Andaian pulangan 6% setahun. Bukan jaminan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KENAPA ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Kenapa perlu mula sekarang</p>
+        <h2>Tiga perkara yang ramai terlepas pandang</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="icon">📈</div>
+            <h3>Inflasi makan simpanan</h3>
+            <p>Harga barang naik setiap tahun. Wang yang disimpan tanpa pertumbuhan akan hilang nilai beli dari masa ke masa.</p>
+          </article>
+          <article class="card">
+            <div class="icon">⏳</div>
+            <h3>Hidup lebih lama</h3>
+            <p>Jangka hayat semakin panjang. Simpanan perlu cukup untuk tempoh persaraan yang mungkin melebihi 20 tahun.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🌱</div>
+            <h3>Masa ialah kelebihan</h3>
+            <p>Lagi awal mula, lagi lama pelaburan berkembang melalui kuasa pengkompaunan, walaupun dengan jumlah kecil.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KALKULATOR ===== -->
+    <section id="kalkulator" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Kalkulator persaraan</p>
+        <h2>Berapa yang anda boleh kumpul?</h2>
+        <p class="section-lead">Ubah nilai di bawah untuk melihat anggaran. Ini hanya ilustrasi, bukan unjuran sebenar sesuatu dana.</p>
+
+        <div class="calc">
+          <form class="calc-form" id="retireCalc" onsubmit="return false">
+            <label>
+              <span>Umur sekarang <output id="oAge">30</output></span>
+              <input type="range" id="age" min="18" max="59" value="30">
+            </label>
+            <label>
+              <span>Umur bersara <output id="oRetire">60</output></span>
+              <input type="range" id="retire" min="40" max="70" value="60">
+            </label>
+            <label>
+              <span>Simpanan sedia ada (RM)</span>
+              <input type="number" id="current" min="0" step="1000" value="0" inputmode="numeric">
+            </label>
+            <label>
+              <span>Pelaburan bulanan <output id="oMonthly">RM300</output></span>
+              <input type="range" id="monthly" min="100" max="3000" step="50" value="300">
+            </label>
+            <label>
+              <span>Andaian pulangan setahun <output id="oRate">6%</output></span>
+              <input type="range" id="rate" min="2" max="10" step="0.5" value="6">
+            </label>
+          </form>
+
+          <div class="calc-result" aria-live="polite">
+            <p class="r-label">Anggaran nilai pada umur <span id="rAge">60</span></p>
+            <p class="r-value" id="rTotal">RM 0</p>
+            <div class="r-bar"><div class="r-bar-in" id="barIn"></div></div>
+            <dl class="r-split">
+              <div><dt><i class="dot dot-in"></i>Jumlah anda labur</dt><dd id="rIn">RM 0</dd></div>
+              <div><dt><i class="dot dot-grow"></i>Anggaran pertumbuhan</dt><dd id="rGrow">RM 0</dd></div>
+            </dl>
+            <p class="r-income">Bersamaan lebih kurang <strong id="rMonthlyIncome">RM 0</strong> sebulan selama 20 tahun persaraan.</p>
+            <a href="#" class="btn btn-block" id="retireBtn" target="_blank" rel="noopener">Bincang pelan ini dengan saya</a>
+          </div>
+        </div>
+        <p class="fine">Pengiraan menggunakan pengkompaunan bulanan dan tidak mengambil kira caj jualan, yuran pengurusan, inflasi atau turun naik pasaran. Pulangan sebenar boleh lebih tinggi atau lebih rendah.</p>
+      </div>
+    </section>
+
+    <!-- ===== UNIT TRUST & PRS ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Pilihan pelaburan</p>
+        <h2>Unit Trust &amp; PRS</h2>
+        <div class="cards two">
+          <article class="card pillar grow">
+            <div class="icon">🌱</div>
+            <h3>Unit Trust</h3>
+            <p>Pelaburan kolektif yang diurus oleh pengurus dana profesional. Sesuai untuk membina kekayaan, dana pendidikan anak dan matlamat jangka sederhana hingga panjang.</p>
+            <ul>
+              <li>Pelaburan bulanan dengan jumlah kecil</li>
+              <li>Kepelbagaian saham, bon dan pasaran</li>
+              <li>Boleh dikeluarkan bila perlu</li>
+            </ul>
+          </article>
+          <article class="card pillar retire">
+            <div class="icon">🏖️</div>
+            <h3>Skim Persaraan Swasta (PRS)</h3>
+            <p>Skim simpanan persaraan sukarela untuk menambah simpanan KWSP anda, direka khas untuk jangka panjang.</p>
+            <ul>
+              <li>Pelepasan cukai sehingga had yang dibenarkan LHDN</li>
+              <li>Pilihan dana mengikut umur dan risiko</li>
+              <li>Disiplin simpanan hingga umur persaraan</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LANGKAH ===== -->
+    <section class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Bagaimana ia berfungsi</p>
+        <h2>Empat langkah mudah</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-n">1</span>
+            <h3>Sesi konsultasi</h3>
+            <p>Kita bincang matlamat, pendapatan dan profil risiko anda. Percuma dan tiada paksaan.</p>
+          </li>
+          <li>
+            <span class="step-n">2</span>
+            <h3>Pelan peribadi</h3>
+            <p>Saya cadangkan gabungan dana Unit Trust dan PRS yang sesuai dengan anda.</p>
+          </li>
+          <li>
+            <span class="step-n">3</span>
+            <h3>Mula melabur</h3>
+            <p>Buka akaun dan tetapkan pelaburan bulanan secara automatik.</p>
+          </li>
+          <li>
+            <span class="step-n">4</span>
+            <h3>Semakan berkala</h3>
+            <p>Kita semak prestasi pelaburan bersama dan laraskan pelan bila perlu.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== SOALAN LAZIM ===== -->
+    <section class="section">
+      <div class="narrow">
+        <p class="eyebrow">Soalan lazim</p>
+        <h2>Soalan tentang pelaburan</h2>
+        <details>
+          <summary>Berapa minimum untuk mula melabur?</summary>
+          <p>Bergantung kepada dana, tetapi kebanyakan pelan pelaburan bulanan boleh dimulakan dengan jumlah kecil.</p>
+        </details>
+        <details>
+          <summary>Apa beza Unit Trust dan PRS?</summary>
+          <p>Unit Trust ialah pelaburan kolektif yang boleh dikeluarkan bila-bila masa. PRS pula direka khas untuk persaraan, dengan pelepasan cukai dan had pengeluaran sebelum umur persaraan.</p>
+        </details>
+        <details>
+          <summary>Adakah pulangan dijamin?</summary>
+          <p>Tidak. Nilai pelaburan boleh naik dan turun mengikut pasaran. Sebab itu penting untuk melabur secara konsisten untuk jangka panjang dan mengikut profil risiko anda.</p>
+        </details>
+        <details>
+          <summary>Ada pilihan patuh Syariah?</summary>
+          <p>Ya, terdapat dana Unit Trust dan PRS yang patuh Syariah.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section cta">
+      <div class="narrow">
+        <h2>Jom rancang persaraan anda</h2>
+        <p class="section-lead">Konsultasi percuma, tanpa sebarang kewajipan.</p>
+        <a href="#" class="btn btn-gold" data-wa="Assalamualaikum, saya nak konsultasi percuma tentang pelaburan dan persaraan.">Konsultasi Percuma</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></p>
+          <p>Perancangan kewangan holistik: perlindungan takaful, pelaburan Unit Trust dan persaraan PRS.</p>
+        </div>
+        <div>
+          <h4>Servis</h4>
+          <ul>
+            <li><a href="perlindungan.html">Perlindungan Takaful</a></li>
+            <li><a href="persaraan.html">Pelaburan &amp; Persaraan</a></li>
+            <li><a href="kerjaya.html">Kerjaya</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hubungi</h4>
+          <ul>
+            <li><a href="#" data-wa>WhatsApp: 012-394 7764</a></li>
+            <li>FIMM: <span data-config="fimm">F02024801</span></li>
+            <li data-requires="takaful">Ejen Takaful: <span data-config="takaful"></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="disclaimer">
+        <p><strong>Penafian:</strong> Laman ini untuk tujuan maklumat sahaja dan bukan tawaran, cadangan atau nasihat pelaburan atau takaful.</p>
+        <p><strong>Pelaburan:</strong> Produk Unit Trust dan PRS ditawarkan melalui Manulife Investment Management (M) Berhad. Pelabur dinasihatkan membaca dan memahami Prospektus / Dokumen Penzahiran serta Lembaran Penonjolan Produk sebelum melabur. Pelaburan melibatkan risiko termasuk risiko kehilangan modal. Harga unit boleh naik atau turun dan prestasi lalu tidak menjamin prestasi masa hadapan.</p>
+        <p><strong>Takaful:</strong> Produk takaful ditawarkan oleh AIA PUBLIC Takaful Bhd. dan tertakluk kepada terma, syarat dan pengecualian dalam sijil takaful. Sila baca Helaian Pendedahan Produk sebelum menyertai.</p>
+        <p class="copy">© <span id="year"></span> <span data-config="brand">Jannah Financial</span>. Hak cipta terpelihara.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="wa-float" data-wa aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

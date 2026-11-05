@@ -1,12 +1,20 @@
-# Landing Page Perancangan Persaraan
+# Jannah Financial: Website Perancangan Kewangan Holistik
 
-Landing page satu halaman untuk mengiklankan perkhidmatan perancangan persaraan (Unit Trust & PRS).
+Website untuk servis perancangan kewangan holistik (Takaful, Unit Trust & PRS) serta pengambilan perunding baharu.
 
-## Kandungan
+Laman langsung: https://nuruljannah84.github.io/Iklan-UT-retirement/
 
-- `index.html`: kandungan halaman
-- `style.css`: reka bentuk dan warna
-- `script.js`: tetapan, kalkulator persaraan dan pautan WhatsApp
+## Halaman
+
+| Fail | Kandungan |
+|---|---|
+| `index.html` | Laman utama: tiga tiang kewangan, semakan kesihatan kewangan, profil, borang hubungi |
+| `perlindungan.html` | Takaful perubatan, penyakit kritikal, hayat/hibah dan kalkulator keperluan perlindungan |
+| `persaraan.html` | Unit Trust, PRS dan kalkulator persaraan |
+| `kerjaya.html` | Pengambilan (recruitment): kenapa sertai, langkah menyertai, borang daftar minat |
+| `style.css` | Reka bentuk dan warna |
+| `script.js` | Tetapan, kalkulator dan pautan WhatsApp |
+| `images/` | Gambar profil dan gambar pratonton pautan (`og-image.jpg`) |
 
 ## Tukar maklumat anda
 
@@ -15,23 +23,30 @@ Buka `script.js` dan ubah bahagian `CONFIG` di bahagian atas:
 ```js
 const CONFIG = {
   brand: "Jannah Financial",
-  name: "Nurul Jannah",
-  fimm: "XXXXXXXX",
-  whatsapp: "60123456789",   // kod negara 60, tanpa "+" atau sengkang
+  name: "Nurul Jannah Mahmud",
+  fimm: "F02024801",
+  takaful: "",              // isi kod ejen AIA PUBLIC Takaful; kosong = tidak dipaparkan
+  whatsapp: "60123947764",  // kod negara 60, tanpa "+" atau sengkang
   ...
 };
 ```
 
-Teks lain (tajuk, testimoni, soalan lazim) boleh diubah terus dalam `index.html`.
-Testimoni sedia ada hanyalah contoh, jadi gantikan dengan testimoni sebenar (dengan kebenaran pelanggan).
+Teks lain (tajuk, penerangan, soalan lazim) boleh diubah terus dalam fail `.html` berkaitan.
+Nombor WhatsApp yang dipaparkan di footer (`012-394 7764`) juga ditulis terus dalam setiap fail `.html`.
 
-## Online-kan dengan GitHub Pages (percuma)
+## Untuk ahli pasukan
 
-1. Gabungkan (merge) fail ini ke branch `main`.
-2. Di GitHub, pergi ke **Settings → Pages**.
-3. Di bawah **Build and deployment**, pilih **Deploy from a branch**, branch `main`, folder `/ (root)`, kemudian **Save**.
-4. Selepas 1–2 minit, laman akan tersedia di `https://nuruljannah84.github.io/Iklan-UT-retirement/`.
+Ahli pasukan boleh guna templat ini untuk website sendiri:
+1. Fork / salin repo ini.
+2. Tukar `CONFIG` dalam `script.js` (nama, FIMM, kod ejen takaful, WhatsApp).
+3. Ganti gambar dalam `images/` dengan gambar sendiri (nama fail yang sama).
+4. Hidupkan GitHub Pages (lihat di bawah).
 
-## Lihat secara lokal
+## Online-kan dengan GitHub Pages
 
-Buka `index.html` terus dalam pelayar (browser).
+**Settings → Pages → Deploy from a branch**, pilih branch yang mengandungi fail ini dan folder `/ (root)`, kemudian **Save**.
+Setiap kali perubahan di-push, laman akan dikemas kini dalam 1–2 minit.
+
+## Pematuhan
+
+Sebelum berkongsi secara meluas, dapatkan kelulusan pematuhan (compliance) daripada Manulife Investment Management (M) Berhad dan AIA PUBLIC Takaful Bhd., kerana kebanyakan syarikat mewajibkan bahan pemasaran ejen diluluskan terlebih dahulu.

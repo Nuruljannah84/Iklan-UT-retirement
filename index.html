@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rancang Persaraan Anda | Jannah Financial</title>
-  <meta name="description" content="Rancang persaraan yang selesa dengan pelaburan Unit Trust dan PRS. Kira anggaran simpanan anda dan dapatkan konsultasi percuma.">
-  <meta property="og:title" content="Rancang Persaraan Anda Bermula Hari Ini">
-  <meta property="og:description" content="Kira anggaran simpanan persaraan anda dan dapatkan konsultasi percuma.">
+  <title>Jannah Financial | Perancangan Kewangan Holistik</title>
+  <meta name="description" content="Perlindungan takaful, pelaburan Unit Trust dan perancangan persaraan PRS bersama Nurul Jannah Mahmud. Konsultasi percuma.">
+  <meta property="og:title" content="Lindungi hari ini, kumpul untuk esok, bersara dengan tenang.">
+  <meta property="og:description" content="Perancangan kewangan holistik: Takaful, Unit Trust & PRS. Konsultasi percuma bersama Nurul Jannah Mahmud.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://nuruljannah84.github.io/Iklan-UT-retirement/images/og-image.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,14 +19,17 @@
   <!-- ===== NAVIGASI ===== -->
   <header class="nav">
     <div class="container nav-inner">
-      <a href="#" class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></a>
-      <nav class="nav-links">
-        <a href="#kenapa">Kenapa</a>
-        <a href="#kalkulator">Kalkulator</a>
-        <a href="#cara">Cara</a>
-        <a href="#soalan">Soalan Lazim</a>
+      <a href="index.html" class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" aria-current="page">Utama</a>
+        <a href="perlindungan.html">Perlindungan</a>
+        <a href="persaraan.html">Pelaburan &amp; Persaraan</a>
+        <a href="kerjaya.html">Kerjaya</a>
+        <a href="index.html#hubungi" class="btn btn-small">Konsultasi Percuma</a>
       </nav>
-      <a href="#hubungi" class="btn btn-small">Konsultasi Percuma</a>
     </div>
   </header>
 
@@ -34,256 +38,235 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow">Perancangan Persaraan</p>
-          <h1>Bersara dengan tenang, bukan dengan risau.</h1>
-          <p class="lead">Simpanan KWSP sahaja mungkin tidak cukup untuk menampung 20 tahun atau lebih selepas bersara. Mulakan pelaburan Unit Trust dan PRS secara konsisten, dengan bimbingan perunding berlesen.</p>
+          <p class="eyebrow">Perancangan Kewangan Holistik</p>
+          <h1>Lindungi hari ini, kumpul untuk esok, bersara dengan tenang.</h1>
+          <p class="lead">Saya bantu individu dan keluarga merancang kewangan secara menyeluruh: perlindungan takaful bila berlaku sakit atau kematian, simpanan dan pelaburan, hinggalah tabung persaraan.</p>
           <div class="hero-actions">
-            <a href="#kalkulator" class="btn">Kira Simpanan Saya</a>
-            <a href="#" class="btn btn-ghost" data-wa>WhatsApp Saya</a>
+            <a href="#" class="btn" data-wa>Konsultasi Percuma</a>
+            <a href="#semak" class="btn btn-ghost">Semak Kesihatan Kewangan</a>
           </div>
           <ul class="trust">
-            <li>Perunding berdaftar FIMM</li>
-            <li>Konsultasi percuma</li>
-            <li>Mula serendah RM100 sebulan</li>
+            <li>Perunding Unit Trust &amp; PRS berdaftar FIMM</li>
+            <li>Ejen AIA PUBLIC Takaful</li>
+            <li>Pilihan patuh Syariah</li>
           </ul>
         </div>
-        <div class="hero-card" aria-hidden="true">
-          <p class="hc-label">Contoh: mula pada umur 30, RM300 sebulan</p>
-          <p class="hc-value" id="heroValue">RM —</p>
-          <p class="hc-sub">anggaran pada umur 60*</p>
-          <svg viewBox="0 0 300 120" class="hc-chart" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="currentColor" stop-opacity=".35"/>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <path d="M0,115 C60,110 110,100 160,82 C210,62 250,35 300,5 L300,120 L0,120 Z" fill="url(#g)"/>
-            <path d="M0,115 C60,110 110,100 160,82 C210,62 250,35 300,5" fill="none" stroke="currentColor" stroke-width="3"/>
-          </svg>
-          <p class="hc-foot">*Andaian pulangan 6% setahun. Bukan jaminan.</p>
+        <div class="hero-photo">
+          <img src="images/nurul-jannah.webp" alt="Nurul Jannah Mahmud, perunding kewangan" width="1023" height="1537">
+          <div class="hero-badge right"><strong>Takaful · Unit Trust · PRS</strong><span>Semua di satu tempat</span></div>
+          <div class="hero-badge"><strong data-config="name">Nurul Jannah Mahmud</strong><span>Perunding Kewangan Holistik</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== KENAPA ===== -->
-    <section id="kenapa" class="section">
+    <!-- ===== TIGA TIANG ===== -->
+    <section id="servis" class="section">
       <div class="container">
-        <p class="eyebrow">Kenapa perlu mula sekarang</p>
-        <h2>Tiga perkara yang ramai terlepas pandang</h2>
+        <p class="eyebrow">Servis saya</p>
+        <h2>Tiga tiang kewangan yang kukuh</h2>
+        <p class="section-lead">Kewangan yang sihat bukan sekadar menyimpan. Ia bermula dengan melindungi apa yang anda ada, kemudian membina dan merancang untuk masa depan.</p>
         <div class="cards">
-          <article class="card">
-            <div class="icon">📈</div>
-            <h3>Inflasi makan simpanan</h3>
-            <p>Harga barang naik setiap tahun. Wang yang disimpan tanpa pertumbuhan akan hilang nilai beli dari masa ke masa.</p>
+          <article class="card pillar protect">
+            <div class="icon">🛡️</div>
+            <p class="tag">Tiang 1</p>
+            <h3>Lindungi</h3>
+            <p>Takaful perubatan, penyakit kritikal dan hayat/hibah supaya kos rawatan atau kehilangan pendapatan tidak menjejaskan keluarga.</p>
+            <a href="perlindungan.html" class="link-arrow">Perlindungan Takaful</a>
           </article>
-          <article class="card">
-            <div class="icon">⏳</div>
-            <h3>Hidup lebih lama</h3>
-            <p>Jangka hayat semakin panjang. Simpanan perlu cukup untuk tempoh persaraan yang mungkin melebihi 20 tahun.</p>
-          </article>
-          <article class="card">
+          <article class="card pillar grow">
             <div class="icon">🌱</div>
-            <h3>Masa ialah kelebihan</h3>
-            <p>Lagi awal mula, lagi lama pelaburan berkembang melalui kuasa pengkompaunan, walaupun dengan jumlah kecil.</p>
+            <p class="tag">Tiang 2</p>
+            <h3>Kumpul</h3>
+            <p>Pelaburan Unit Trust secara bulanan untuk mengembangkan simpanan, dana pendidikan anak dan matlamat jangka panjang.</p>
+            <a href="persaraan.html" class="link-arrow">Pelaburan Unit Trust</a>
+          </article>
+          <article class="card pillar retire">
+            <div class="icon">🏖️</div>
+            <p class="tag">Tiang 3</p>
+            <h3>Bersara</h3>
+            <p>Tabung pencen melalui PRS dan Unit Trust, dengan pelepasan cukai, supaya anda boleh bersara dengan selesa.</p>
+            <a href="persaraan.html#kalkulator" class="link-arrow">Kalkulator Persaraan</a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ===== KALKULATOR ===== -->
-    <section id="kalkulator" class="section section-alt">
+    <!-- ===== SEMAKAN KESIHATAN KEWANGAN ===== -->
+    <section id="semak" class="section section-alt">
       <div class="container">
-        <p class="eyebrow">Kalkulator persaraan</p>
-        <h2>Berapa yang anda boleh kumpul?</h2>
-        <p class="section-lead">Ubah nilai di bawah untuk melihat anggaran. Ini hanya ilustrasi, bukan unjuran sebenar sesuatu dana.</p>
-
-        <div class="calc">
-          <form class="calc-form" id="calcForm" onsubmit="return false">
-            <label>
-              <span>Umur sekarang <output id="oAge">30</output></span>
-              <input type="range" id="age" min="18" max="59" value="30">
-            </label>
-            <label>
-              <span>Umur bersara <output id="oRetire">60</output></span>
-              <input type="range" id="retire" min="40" max="70" value="60">
-            </label>
-            <label>
-              <span>Simpanan sedia ada (RM)</span>
-              <input type="number" id="current" min="0" step="1000" value="0" inputmode="numeric">
-            </label>
-            <label>
-              <span>Pelaburan bulanan <output id="oMonthly">RM300</output></span>
-              <input type="range" id="monthly" min="100" max="3000" step="50" value="300">
-            </label>
-            <label>
-              <span>Andaian pulangan setahun <output id="oRate">6%</output></span>
-              <input type="range" id="rate" min="2" max="10" step="0.5" value="6">
-            </label>
+        <p class="eyebrow">Semakan 1 minit</p>
+        <h2>Sejauh mana kewangan anda bersedia?</h2>
+        <p class="section-lead">Tandakan perkara yang anda sudah ada sekarang.</p>
+        <div class="check-grid">
+          <form id="healthCheck" onsubmit="return false">
+            <ul class="check-list">
+              <li><label><input type="checkbox" data-label="Dana kecemasan">Dana kecemasan sekurang-kurangnya 3 hingga 6 bulan perbelanjaan</label></li>
+              <li><label><input type="checkbox" data-label="Kad perubatan">Kad perubatan / perlindungan hospital sendiri</label></li>
+              <li><label><input type="checkbox" data-label="Perlindungan penyakit kritikal">Perlindungan penyakit kritikal</label></li>
+              <li><label><input type="checkbox" data-label="Perlindungan hayat / hibah">Perlindungan hayat atau hibah untuk tanggungan</label></li>
+              <li><label><input type="checkbox" data-label="Simpanan / pelaburan bulanan">Simpanan atau pelaburan bulanan yang konsisten</label></li>
+              <li><label><input type="checkbox" data-label="Pelan persaraan selain KWSP">Pelan persaraan selain KWSP</label></li>
+            </ul>
           </form>
-
-          <div class="calc-result" aria-live="polite">
-            <p class="r-label">Anggaran nilai pada umur <span id="rAge">60</span></p>
-            <p class="r-value" id="rTotal">RM 0</p>
-            <div class="r-bar">
-              <div class="r-bar-in" id="barIn"></div>
-            </div>
-            <dl class="r-split">
-              <div><dt><i class="dot dot-in"></i>Jumlah anda labur</dt><dd id="rIn">RM 0</dd></div>
-              <div><dt><i class="dot dot-grow"></i>Anggaran pertumbuhan</dt><dd id="rGrow">RM 0</dd></div>
-            </dl>
-            <p class="r-income">Bersamaan lebih kurang <strong id="rMonthlyIncome">RM 0</strong> sebulan selama 20 tahun persaraan.</p>
-            <a href="#" class="btn btn-block" data-wa data-wa-calc>Bincang pelan ini dengan saya</a>
+          <div class="calc-result score-card" aria-live="polite">
+            <p class="r-label center">Skor kesihatan kewangan anda</p>
+            <div class="score-ring" id="scoreRing"><span id="scoreNum">0/6</span></div>
+            <p class="score-msg" id="scoreMsg"></p>
+            <a href="#" class="btn btn-block" id="scoreBtn" target="_blank" rel="noopener">Bincang keputusan ini dengan saya</a>
           </div>
         </div>
-        <p class="fine">Pengiraan menggunakan pengkompaunan bulanan dan tidak mengambil kira caj jualan, yuran pengurusan, inflasi atau turun naik pasaran. Pulangan sebenar boleh lebih tinggi atau lebih rendah.</p>
       </div>
     </section>
 
-    <!-- ===== CARA ===== -->
-    <section id="cara" class="section">
+    <!-- ===== CARA SAYA BEKERJA ===== -->
+    <section class="section">
       <div class="container">
-        <p class="eyebrow">Bagaimana ia berfungsi</p>
-        <h2>Empat langkah mudah</h2>
+        <p class="eyebrow">Cara saya bekerja</p>
+        <h2>Faham dulu, baru cadang</h2>
         <ol class="steps">
           <li>
             <span class="step-n">1</span>
-            <h3>Sesi konsultasi</h3>
-            <p>Kita bincang matlamat, pendapatan dan profil risiko anda. Percuma dan tiada paksaan.</p>
+            <h3>Kenali anda</h3>
+            <p>Sesi santai untuk faham keluarga, pendapatan, komitmen dan matlamat anda.</p>
           </li>
           <li>
             <span class="step-n">2</span>
-            <h3>Pelan peribadi</h3>
-            <p>Saya cadangkan gabungan dana Unit Trust dan PRS yang sesuai dengan anda.</p>
+            <h3>Analisis</h3>
+            <p>Saya semak perlindungan dan simpanan sedia ada untuk kenal pasti jurang.</p>
           </li>
           <li>
             <span class="step-n">3</span>
-            <h3>Mula melabur</h3>
-            <p>Buka akaun dan tetapkan pelaburan bulanan secara automatik.</p>
+            <h3>Pelan holistik</h3>
+            <p>Cadangan perlindungan, pelaburan dan persaraan yang seimbang dengan bajet anda.</p>
           </li>
           <li>
             <span class="step-n">4</span>
-            <h3>Semakan berkala</h3>
-            <p>Kita semak prestasi pelaburan bersama dan laraskan pelan bila perlu.</p>
+            <h3>Bersama selamanya</h3>
+            <p>Semakan berkala, kemas kini pelan dan bantuan semasa tuntutan.</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- ===== KELEBIHAN PRS ===== -->
-    <section class="section section-alt">
-      <div class="container split">
-        <div>
-          <p class="eyebrow">Unit Trust & PRS</p>
-          <h2>Kenapa pilih pelaburan ini?</h2>
-          <p class="section-lead">Unit Trust dan Skim Persaraan Swasta (PRS) diurus oleh pengurus dana profesional dan dikawal selia di Malaysia.</p>
-        </div>
-        <ul class="checks">
-          <li><strong>Pelepasan cukai PRS</strong> sehingga had yang dibenarkan LHDN setiap tahun.</li>
-          <li><strong>Pilihan dana patuh Syariah</strong> untuk yang mengutamakan pelaburan halal.</li>
-          <li><strong>Kepelbagaian</strong> merentasi saham, bon dan pasaran berbeza.</li>
-          <li><strong>Fleksibel</strong>: mula dengan jumlah kecil dan tambah bila mampu.</li>
-          <li><strong>Diurus profesional</strong>: tak perlu pantau pasaran setiap hari.</li>
-        </ul>
-      </div>
-    </section>
-
     <!-- ===== TENTANG ===== -->
-    <section class="section">
+    <section id="tentang" class="section section-alt">
       <div class="container about">
-        <div class="avatar" aria-hidden="true">J</div>
+        <img class="avatar" src="images/nurul-jannah-square.webp" alt="Nurul Jannah Mahmud" width="480" height="480">
         <div>
           <p class="eyebrow">Perunding anda</p>
           <h2>Hai, saya <span data-config="name">Nurul Jannah Mahmud</span> 👋</h2>
-          <p>Saya perunding Unit Trust dan PRS berdaftar dengan FIMM, mewakili Manulife Investment Management (M) Berhad. Saya membantu individu dan keluarga merancang persaraan dengan cara yang mudah difahami, tanpa istilah yang mengelirukan.</p>
-          <p class="muted">No. Pendaftaran FIMM: <span data-config="fimm">F02024801</span></p>
+          <p>Saya membantu keluarga Malaysia melindungi pendapatan, membina simpanan dan merancang persaraan, dengan penerangan yang mudah difahami tanpa istilah yang mengelirukan.</p>
+          <p>Untuk Unit Trust dan PRS, saya mewakili Manulife Investment Management (M) Berhad. Untuk perlindungan takaful, saya mewakili AIA PUBLIC Takaful Bhd.</p>
+          <ul class="creds">
+            <li>FIMM: <span data-config="fimm">F02024801</span></li>
+            <li data-requires="takaful">Ejen Takaful: <span data-config="takaful"></span></li>
+            <li>Konsultasi percuma</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- ===== TESTIMONI ===== -->
-    <section class="section section-alt">
+    <!-- ===== KERJAYA ===== -->
+    <section class="section">
       <div class="container">
-        <p class="eyebrow">Kata pelanggan</p>
-        <h2>Mereka dah mula, anda bila lagi?</h2>
-        <div class="cards">
-          <!-- GANTIKAN dengan testimoni sebenar (dengan kebenaran pelanggan). -->
-          <blockquote class="card quote">
-            <p>"Penerangan sangat jelas. Sekarang saya faham apa yang saya labur dan kenapa."</p>
-            <footer>Pelanggan, 34 tahun</footer>
-          </blockquote>
-          <blockquote class="card quote">
-            <p>"Dulu rasa persaraan jauh lagi. Lepas tengok kiraan, terus mula RM200 sebulan."</p>
-            <footer>Pelanggan, 28 tahun</footer>
-          </blockquote>
-          <blockquote class="card quote">
-            <p>"Dapat pelepasan cukai PRS sekali. Memang berbaloi."</p>
-            <footer>Pelanggan, 41 tahun</footer>
-          </blockquote>
+        <div class="band">
+          <div>
+            <p class="eyebrow" style="color: var(--gold)">Peluang kerjaya</p>
+            <h2>Nak bantu orang sambil bina kerjaya sendiri?</h2>
+            <p>Sertai pasukan saya sebagai perunding kewangan. Latihan dan bimbingan disediakan, tiada pengalaman diperlukan.</p>
+          </div>
+          <a href="kerjaya.html" class="btn btn-gold">Ketahui Lebih Lanjut</a>
         </div>
       </div>
     </section>
 
     <!-- ===== SOALAN LAZIM ===== -->
-    <section id="soalan" class="section">
-      <div class="container narrow">
+    <section id="soalan" class="section section-alt">
+      <div class="narrow">
         <p class="eyebrow">Soalan lazim</p>
         <h2>Ada soalan?</h2>
         <details>
-          <summary>Berapa minimum untuk mula melabur?</summary>
-          <p>Bergantung kepada dana, tetapi kebanyakan pelan pelaburan bulanan boleh dimulakan dengan jumlah kecil, contohnya RM100 sebulan.</p>
+          <summary>Apa maksud perancangan kewangan holistik?</summary>
+          <p>Ia bermaksud melihat keseluruhan kewangan anda, bukan satu produk sahaja. Kita pastikan anda terlindung daripada risiko sakit dan kematian, ada simpanan yang berkembang, dan bersedia untuk persaraan.</p>
         </details>
         <details>
-          <summary>Apa beza Unit Trust dan PRS?</summary>
-          <p>Unit Trust ialah pelaburan kolektif yang boleh dikeluarkan bila-bila masa. PRS pula direka khas untuk persaraan, dengan pelepasan cukai dan had pengeluaran sebelum umur persaraan.</p>
+          <summary>Mana satu patut didahulukan: perlindungan atau pelaburan?</summary>
+          <p>Biasanya perlindungan asas seperti kad perubatan dan perlindungan hayat didahulukan, kerana satu kejadian sakit boleh menghabiskan simpanan bertahun-tahun. Namun keutamaan bergantung kepada situasi anda dan kita bincang semasa konsultasi.</p>
         </details>
         <details>
-          <summary>Adakah pulangan dijamin?</summary>
-          <p>Tidak. Nilai pelaburan boleh naik dan turun mengikut pasaran. Sebab itu penting untuk melabur secara konsisten untuk jangka panjang dan mengikut profil risiko anda.</p>
-        </details>
-        <details>
-          <summary>Ada pilihan patuh Syariah?</summary>
-          <p>Ya, terdapat banyak dana Unit Trust dan PRS yang patuh Syariah.</p>
+          <summary>Apa beza takaful dengan insurans konvensional?</summary>
+          <p>Takaful beroperasi berdasarkan prinsip Syariah, di mana peserta saling membantu melalui sumbangan (tabarru') ke dalam dana bersama. Ia bebas daripada unsur riba, gharar dan maisir.</p>
         </details>
         <details>
           <summary>Konsultasi betul-betul percuma?</summary>
-          <p>Ya. Sesi pertama percuma dan tiada sebarang kewajipan untuk melabur.</p>
+          <p>Ya. Sesi pertama percuma dan tiada sebarang kewajipan untuk menyertai apa-apa pelan.</p>
+        </details>
+        <details>
+          <summary>Boleh buat sesi secara dalam talian?</summary>
+          <p>Boleh. Sesi boleh dibuat secara bersemuka atau melalui panggilan video, ikut keselesaan anda.</p>
         </details>
       </div>
     </section>
 
     <!-- ===== HUBUNGI ===== -->
     <section id="hubungi" class="section cta">
-      <div class="container narrow">
-        <h2>Jom rancang persaraan anda</h2>
+      <div class="narrow">
+        <h2>Jom mula rancang kewangan anda</h2>
         <p class="section-lead">Isi maklumat ringkas di bawah. Mesej akan dihantar terus ke WhatsApp saya.</p>
         <form class="contact" id="contactForm">
           <label><span>Nama</span><input type="text" id="cName" required autocomplete="name"></label>
           <label><span>Umur</span><input type="number" id="cAge" min="18" max="80" inputmode="numeric"></label>
-          <label class="full"><span>Apa matlamat anda?</span>
+          <label class="full"><span>Apa yang anda perlukan?</span>
             <select id="cGoal">
-              <option>Simpanan persaraan</option>
-              <option>Pelepasan cukai PRS</option>
-              <option>Dana pendidikan anak</option>
+              <option>Kad perubatan / perlindungan hospital</option>
+              <option>Perlindungan penyakit kritikal</option>
+              <option>Takaful hayat / hibah</option>
+              <option>Pelaburan Unit Trust</option>
+              <option>Persaraan / PRS &amp; pelepasan cukai</option>
+              <option>Semakan kewangan menyeluruh</option>
               <option>Belum pasti, nak tahu lebih lanjut</option>
             </select>
           </label>
-          <button type="submit" class="btn btn-block full">Hantar melalui WhatsApp</button>
+          <button type="submit" class="btn btn-gold btn-block full">Hantar melalui WhatsApp</button>
         </form>
       </div>
     </section>
   </main>
 
-  <!-- ===== FOOTER & PENAFIAN ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <p class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></p>
-      <p class="disclaimer"><strong>Penafian:</strong> Laman ini adalah untuk tujuan maklumat sahaja dan bukan tawaran atau nasihat pelaburan. Pelabur dinasihatkan membaca dan memahami kandungan Prospektus / Dokumen Penzahiran serta Lembaran Penonjolan Produk sebelum melabur. Pelaburan melibatkan risiko termasuk risiko kehilangan modal. Harga unit dan pulangan boleh naik atau turun. Prestasi lalu tidak menjamin prestasi masa hadapan. Ilustrasi kalkulator adalah anggaran semata-mata.</p>
-      <p class="copy">© <span id="year"></span> <span data-config="brand">Jannah Financial</span>. Hak cipta terpelihara.</p>
+      <div class="footer-grid">
+        <div>
+          <p class="brand"><span class="brand-mark">J</span><span data-config="brand">Jannah Financial</span></p>
+          <p>Perancangan kewangan holistik: perlindungan takaful, pelaburan Unit Trust dan persaraan PRS.</p>
+        </div>
+        <div>
+          <h4>Servis</h4>
+          <ul>
+            <li><a href="perlindungan.html">Perlindungan Takaful</a></li>
+            <li><a href="persaraan.html">Pelaburan &amp; Persaraan</a></li>
+            <li><a href="kerjaya.html">Kerjaya</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hubungi</h4>
+          <ul>
+            <li><a href="#" data-wa>WhatsApp: 012-394 7764</a></li>
+            <li>FIMM: <span data-config="fimm">F02024801</span></li>
+            <li data-requires="takaful">Ejen Takaful: <span data-config="takaful"></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="disclaimer">
+        <p><strong>Penafian:</strong> Laman ini untuk tujuan maklumat sahaja dan bukan tawaran, cadangan atau nasihat pelaburan atau takaful.</p>
+        <p><strong>Pelaburan:</strong> Produk Unit Trust dan PRS ditawarkan melalui Manulife Investment Management (M) Berhad. Pelabur dinasihatkan membaca dan memahami Prospektus / Dokumen Penzahiran serta Lembaran Penonjolan Produk sebelum melabur. Pelaburan melibatkan risiko termasuk risiko kehilangan modal. Harga unit boleh naik atau turun dan prestasi lalu tidak menjamin prestasi masa hadapan.</p>
+        <p><strong>Takaful:</strong> Produk takaful ditawarkan oleh AIA PUBLIC Takaful Bhd. dan tertakluk kepada terma, syarat dan pengecualian dalam sijil takaful. Sila baca Helaian Pendedahan Produk sebelum menyertai.</p>
+        <p class="copy">© <span id="year"></span> <span data-config="brand">Jannah Financial</span>. Hak cipta terpelihara.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Butang WhatsApp terapung -->
   <a href="#" class="wa-float" data-wa aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
   </a>
