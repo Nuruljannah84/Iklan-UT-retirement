@@ -375,3 +375,17 @@ details p { color: var(--muted); margin: .8rem 0 0; }
   .hero-badge { left: 0; font-size: .78rem; }
   .hero-badge.right { right: 0; }
 }
+
+/* ---------- Kad pelan sandaran (Perlindungan) ---------- */
+.plan { border-left: 4px solid var(--maroon); }
+.plan-when {
+  display: inline-block;
+  background: var(--maroon-soft); color: var(--maroon) !important;
+  font-size: .8rem; font-weight: 700;
+  padding: .3em .8em; border-radius: 999px;
+  margin-bottom: .9rem !important;
+}
+.plan h3 { display: flex; align-items: center; gap: .45em; }
+.icon-inline { font-size: 1.3rem; }
+.plan > p:not(.plan-when) { color: var(--ink); font-weight: 500; }
+.plan ul li::marker { color: var(--green-500); content: "✓  "; }

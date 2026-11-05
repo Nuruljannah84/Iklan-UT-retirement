@@ -150,11 +150,11 @@ if ($("protectCalc")) {
     $("pExistingOut").textContent = "− " + rm(existing);
     $("pGap").textContent = rm(gap);
     $("pGapNote").textContent = gap === 0
-      ? "Perlindungan sedia ada anda nampak mencukupi berdasarkan anggaran ini."
-      : "Ini anggaran jurang perlindungan yang keluarga anda mungkin hadapi.";
+      ? "Tahniah! Perlindungan sedia ada anda nampak mencukupi. Jom semak sama ada ia masih sesuai dengan keperluan semasa."
+      : "Dengan pelan sandaran ini, keluarga anda boleh meneruskan kehidupan dan matlamat seperti yang dirancang.";
     $("protectBtn").href = waLink(
-      `Assalamualaikum, saya guna kalkulator perlindungan di laman anda. Anggaran jurang perlindungan saya ${rm(gap)}. ` +
-      `Boleh bantu semak pelan takaful yang sesuai?`
+      `Assalamualaikum, saya guna kalkulator pelan sandaran di laman anda. Cadangan tambahan perlindungan saya ${rm(gap)}. ` +
+      `Boleh bantu saya bina pelan takaful yang sesuai?`
     );
   };
   $("protectCalc").addEventListener("input", calcProtect);
