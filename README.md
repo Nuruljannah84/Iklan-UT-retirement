@@ -25,7 +25,7 @@ const CONFIG = {
   brand: "Jannah Financial",
   name: "Nurul Jannah Mahmud",
   fimm: "F02024801",
-  takaful: "",              // isi kod ejen AIA PUBLIC Takaful; kosong = tidak dipaparkan
+  takaful: "8431Q",         // kod ejen AIA PUBLIC Takaful; kosong = tidak dipaparkan
   whatsapp: "60123947764",  // kod negara 60, tanpa "+" atau sengkang
   ...
 };

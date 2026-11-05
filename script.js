@@ -5,7 +5,7 @@ const CONFIG = {
   brand: "Jannah Financial",               // Nama bisnes
   name: "Nurul Jannah Mahmud",             // Nama anda
   fimm: "F02024801",                       // No. pendaftaran FIMM (Unit Trust & PRS)
-  takaful: "",                             // No. / kod ejen AIA PUBLIC Takaful (kosong = disembunyikan)
+  takaful: "8431Q",                        // No. / kod ejen AIA PUBLIC Takaful (kosong = disembunyikan)
   whatsapp: "60123947764",                 // No. WhatsApp: kod negara 60, tanpa "+", tanpa sengkang
   defaultMessage: "Assalamualaikum, saya berminat nak tahu tentang perancangan kewangan."
 };
