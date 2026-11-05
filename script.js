@@ -3,9 +3,9 @@
    ===================================================== */
 const CONFIG = {
   brand: "Jannah Financial",          // Nama bisnes
-  name: "Nurul Jannah",               // Nama anda
+  name: "Nurul Jannah Mahmud",        // Nama anda
   fimm: "XXXXXXXX",                   // No. pendaftaran FIMM
-  whatsapp: "60123456789",            // No. WhatsApp: kod negara 60, tanpa "+", tanpa sengkang
+  whatsapp: "60123947764",            // No. WhatsApp: kod negara 60, tanpa "+", tanpa sengkang
   defaultMessage: "Assalamualaikum, saya berminat nak tahu tentang perancangan persaraan."
 };
 
