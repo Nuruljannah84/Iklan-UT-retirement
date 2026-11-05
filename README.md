@@ -2,7 +2,7 @@
 
 Website untuk servis perancangan kewangan holistik (Takaful, Unit Trust & PRS) serta pengambilan perunding baharu.
 
-Laman langsung: https://nuruljannah84.github.io/Iklan-UT-retirement/
+Laman langsung: https://jannahfinancial.netlify.app/
 
 ## Halaman
 
@@ -42,10 +42,14 @@ Ahli pasukan boleh guna templat ini untuk website sendiri:
 3. Ganti gambar dalam `images/` dengan gambar sendiri (nama fail yang sama).
 4. Hidupkan GitHub Pages (lihat di bawah).
 
-## Online-kan dengan GitHub Pages
+## Hosting (Netlify, percuma)
 
-**Settings → Pages → Deploy from a branch**, pilih branch yang mengandungi fail ini dan folder `/ (root)`, kemudian **Save**.
-Setiap kali perubahan di-push, laman akan dikemas kini dalam 1–2 minit.
+Laman dihoskan di Netlify dan disambungkan terus ke repo ini. Setiap kali perubahan di-push,
+Netlify akan kemas kini laman secara automatik dalam 1–2 minit.
+
+- Tetapan build ada dalam `netlify.toml` (laman statik, tiada build).
+- Nama laman ditukar di Netlify: **Site configuration → Change site name**.
+- Jika nama laman bertukar, kemas kini juga pautan `og:image` dalam setiap fail `.html`.
 
 ## Pematuhan
 

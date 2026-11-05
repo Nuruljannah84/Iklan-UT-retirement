@@ -1,0 +1,4 @@
+# Tetapan Netlify: laman statik, tiada proses build.
+[build]
+  publish = "."
+  command = ""
