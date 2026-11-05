@@ -376,7 +376,7 @@ details p { color: var(--muted); margin: .8rem 0 0; }
   .hero-badge.right { right: 0; }
 }
 
-/* ---------- Kad pelan sandaran (Perlindungan) ---------- */
+/* ---------- Kad backup plan (Perlindungan) ---------- */
 .plan { border-left: 4px solid var(--maroon); }
 .plan-when {
   display: inline-block;

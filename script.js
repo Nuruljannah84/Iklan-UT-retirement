@@ -151,9 +151,9 @@ if ($("protectCalc")) {
     $("pGap").textContent = rm(gap);
     $("pGapNote").textContent = gap === 0
       ? "Tahniah! Perlindungan sedia ada anda nampak mencukupi. Jom semak sama ada ia masih sesuai dengan keperluan semasa."
-      : "Dengan pelan sandaran ini, keluarga anda boleh meneruskan kehidupan dan matlamat seperti yang dirancang.";
+      : "Dengan backup plan ini, keluarga anda boleh meneruskan kehidupan dan matlamat seperti yang dirancang.";
     $("protectBtn").href = waLink(
-      `Assalamualaikum, saya guna kalkulator pelan sandaran di laman anda. Cadangan tambahan perlindungan saya ${rm(gap)}. ` +
+      `Assalamualaikum, saya guna kalkulator backup plan di laman anda. Cadangan tambahan perlindungan saya ${rm(gap)}. ` +
       `Boleh bantu saya bina pelan takaful yang sesuai?`
     );
   };
