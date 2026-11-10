@@ -62,4 +62,5 @@ def main():
         print(info[-1])
     json.dump(info, open(f"{out}/vo.json", "w"), indent=1, ensure_ascii=False)
 
-main()
+if __name__ == "__main__":
+    main()

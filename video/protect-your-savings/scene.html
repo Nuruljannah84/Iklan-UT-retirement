@@ -59,7 +59,11 @@
 <script>
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#1d1d1f", NAVY = "#1b2a4a", GOLD = "#c9a227", GOLD_T = "#b08a17", GOLD_L = "#f1d97a", SKIN = "#f4d8c2";
-const T = window.TIMING || { s2: 5.95, s3: 10.38, s4: 15.35, end: 20, pan: 0.5 };
+// Actual scene start times (follow the Malay voiceover). Scenes 1-4 were laid out on the design
+// timeline D and are stretched/compressed onto T at build time (see warpScenes).
+const T = window.TIMING || { s2: 4.60, s3: 9.92, s4: 13.79, s5: 16.59, end: 20, pan: 0.5 };
+const D = { s2: 5.95, s3: 10.38, s4: 15.35, s5: 18.75 };
+const PHOTO = "../../images/nurul-jannah.webp";
 
 // ---------- helpers ----------
 function el(tag, attrs, parent) {
@@ -75,8 +79,18 @@ const easeOut = k => 1 - Math.pow(1 - k, 3);
 const easeBack = k => { const c = 1.6; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
 const prog = (t, a, d) => clamp((t - a) / d);
 
-const items = [];   // drawable things on the timeline
 const updaters = []; // custom per-frame animation functions
+const items = [];   // drawable things on the timeline
+const marks = [];
+function mark() { marks.push([items.length, updaters.length]); }
+// Map each scene's design window [a, b] onto its real window [na, nb].
+function warpScenes(wins) {
+  wins.forEach(([a, b, na, nb], i) => {
+    const k = (nb - na) / (b - a), [i0, u0] = marks[i], [i1, u1] = marks[i + 1];
+    for (let j = i0; j < i1; j++) { items[j].start = na + (items[j].start - a) * k; items[j].dur *= k; }
+    for (let j = u0; j < u1; j++) { const f = updaters[j]; updaters[j] = t => f(a + (t - na) / k); }
+  });
+}
 
 // stroke-drawn paths: several paths drawn one after another in [start, start+dur]
 function draw(group, ds, start, dur, cls = "ink", extra = {}) {
@@ -122,10 +136,11 @@ function jar(group, cx, by, s) {
 let scenes, art, fills, hand;
 function build() {
 const world = document.getElementById("world");
-scenes = [1, 2, 3, 4].map(i => el("g", { id: "s" + i }, world));
+scenes = [1, 2, 3, 4, 5].map(i => el("g", { id: "s" + i }, world));
 art = scenes.map(s => el("g", { filter: "url(#rough)" }, s)); // sketchy line layer
 fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i]); return g; });
 
+mark();
 // ======================= SCENE 1: you build your savings =======================
 (function () {
   const t0 = 0.25, A = art[0], F = fills[0];
@@ -196,9 +211,10 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
   draw(A, ["M690,720 L668,705", "M700,680 L676,660", "M880,700 L905,685"], Q + .5, .25, "ink thin");
 })();
 
+mark();
 // ======================= SCENE 2: the reality =======================
 (function () {
-  const t0 = T.s2 + T.pan * .6, A = art[1], F = fills[1];
+  const t0 = D.s2 + .3, A = art[1], F = fills[1];
   write(A, "UNEXPECTED RISKS.", 540, 330, 84, t0, .75);
   write(A, "UNEXPECTED COSTS.", 540, 435, 84, t0 + .8, .75, "head", 920, GOLD_T);
 
@@ -279,9 +295,10 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
   }
 })();
 
+mark();
 // ======================= SCENE 3: financial impact =======================
 (function () {
-  const t0 = T.s3 + T.pan * .6, A = art[2], F = fills[2];
+  const t0 = D.s3 + .3, A = art[2], F = fills[2];
   write(A, "ONE EVENT CAN AFFECT", 540, 310, 78, t0, .75);
   write(A, "YOUR ENTIRE", 540, 405, 78, t0 + .78, .45);
   write(A, "FINANCIAL PLAN.", 540, 500, 78, t0 + 1.25, .6, "head", 920, GOLD_T);
@@ -309,16 +326,16 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
   fill(F, bolt, GOLD, E + .3, .15);
   draw(A, [bolt], E, .3);
   draw(A, ["M470,650 L440,630", "M650,650 L680,630", "M455,730 L420,735", "M665,730 L700,735"], E + .32, .15, "ink thin goldS");
-  const D = E + .45;
+  const DR = E + .45;
   rects.forEach(([gr, pr, lv, i]) => {
     updaters.push(t => {
-      const k = easeIO(prog(t, D + i * .12, 1.9));
+      const k = easeIO(prog(t, DR + i * .12, 1.9));
       const h = lerp(lv * 262, 0.24 * 262, k);
       [gr, pr].forEach(r => { r.setAttribute("y", -h); r.setAttribute("height", h + 20); });
     });
   });
   jars.forEach(([x], i) => {
-    const st = D + .2 + i * .12;
+    const st = DR + .2 + i * .12;
     draw(A, [`M${x},${base - 215} L${x},${base - 125}`, `M${x - 22},${base - 150} L${x},${base - 122} L${x + 22},${base - 150}`], st, .35, "ink navyS", { "stroke-width": 11 });
     draw(A, [`M${x - 30},${base - 4} l10,-26 l12,16 l12,-24`], st + .1, .2, "ink thin");
     for (let c = 0; c < 3; c++) {
@@ -334,9 +351,10 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
   });
 })();
 
+mark();
 // ======================= SCENE 4: protect it =======================
 (function () {
-  const t0 = T.s4 + T.pan * .6, A = art[3], F = fills[3];
+  const t0 = D.s4 + .3, A = art[3], F = fills[3];
   write(A, "DON'T JUST BUILD WEALTH.", 540, 330, 80, t0, .95);
   write(A, "PROTECT IT.", 540, 460, 116, t0 + 1.0, .6, "head", 920, GOLD_T);
 
@@ -397,32 +415,17 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
     });
   });
 
-  // call to action
-  const CT = 18.05;
-  const cta = el("g", {}, scenes[3]);
-  el("rect", { x: 90, y: 1395, width: 900, height: 150, rx: 75, fill: "url(#cta)" }, cta);
-  el("rect", { x: 98, y: 1403, width: 884, height: 134, rx: 67, fill: "none", stroke: GOLD, "stroke-width": 3 }, cta);
-  const ct1 = el("text", { x: 515, y: 1458, "font-family": "Montserrat", "font-weight": 700, "font-size": 40, fill: "#ffffff", "text-anchor": "middle", "letter-spacing": ".5" }, cta);
-  ct1.textContent = "Start Reviewing Your";
-  const ct2 = el("text", { x: 515, y: 1508, "font-family": "Montserrat", "font-weight": 700, "font-size": 40, fill: GOLD_L, "text-anchor": "middle", "letter-spacing": ".5" }, cta);
-  ct2.textContent = "Financial Protection Today";
-  const arrow = el("path", { d: "M900,1470 L940,1470 M922,1452 L940,1470 L922,1488", fill: "none", stroke: GOLD, "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" }, cta);
-  updaters.push(t => {
-    const k = prog(t, CT, .45);
-    cta.style.opacity = k > 0 ? Math.min(1, k * 3) : 0;
-    cta.setAttribute("transform", `translate(540,1470) scale(${k > 0 ? .6 + .4 * easeBack(k) : .6}) translate(-540,-1470)`);
-    arrow.setAttribute("transform", `translate(${8 * Math.max(0, Math.sin((t - CT - .5) * 5))},0)`);
-  });
 })();
 
+mark();
+warpScenes([[0, D.s2, 0, T.s2], [D.s2, D.s3, T.s2, T.s3], [D.s3, D.s4, T.s3, T.s4], [D.s4, D.s5, T.s4, T.s5]]);
+
 // ======================= subtitles (only when window.SHOW_SUBS) =======================
-// Word times (s) measured from the scene-3 voiceover, which starts at 10.55 s.
+// Word times (s) measured from the scene-3 voiceover, which starts at 10.04 s.
 const SUBS = [
-  [["Without", 10.55], ["proper", 10.82]],
-  [["financial", 11.08], ["protection,", 11.52]],
-  [["your", 12.05], ["emergency", 12.17], ["fund,", 12.70], ["investment", 13.05]],
-  [["and", 13.57], ["retirement", 13.76], ["savings", 14.08]],
-  [["boleh", 14.55], ["terjejas.", 14.87]],
+  [["Dana", 10.04], ["kecemasan,", 10.30]],
+  [["pelaburan", 11.10], ["dan", 11.74], ["persaraan,", 11.92]],
+  [["semuanya", 12.54], ["boleh", 13.11], ["terjejas.", 13.34]],
 ];
 const SUB_END = T.s4 + .1;
 if (window.SHOW_SUBS) (function () {
@@ -450,6 +453,57 @@ if (window.SHOW_SUBS) (function () {
       });
     });
   });
+})();
+
+// ======================= SCENE 5: call to action with photo =======================
+(function () {
+  const t0 = T.s5 + T.pan * .6, S5 = scenes[4], A = art[4], F = fills[4];
+  const cx = 540, cy = 790, R = 290, ps = .64;            // face sits near (505,640) in the 1023x1537 photo
+  const cp = el("clipPath", { id: "photoClip" }, document.querySelector("defs"));
+  el("circle", { cx, cy, r: R }, cp);
+  const ph = el("g", {}, F);
+  const inner = el("g", { "clip-path": "url(#photoClip)" }, ph);
+  el("rect", { x: cx - R, y: cy - R, width: 2 * R, height: 2 * R, fill: "#f1f1f1" }, inner);
+  el("image", { href: PHOTO, x: cx - 505 * ps, y: cy - 640 * ps, width: 1023 * ps, height: 1537 * ps }, inner);
+  updaters.push(t => {
+    const k = prog(t, t0 + .12, .45);
+    ph.style.opacity = Math.min(1, k * 2.5);
+    ph.setAttribute("transform", `translate(${cx},${cy}) scale(${k > 0 ? .86 + .14 * easeBack(k) : .86}) translate(${-cx},${-cy})`);
+  });
+  const ring = r => `M${cx},${cy - r} C${cx + r * .56},${cy - r} ${cx + r},${cy - r * .55} ${cx + r},${cy} C${cx + r},${cy + r * .56} ${cx + r * .55},${cy + r} ${cx},${cy + r} C${cx - r * .56},${cy + r} ${cx - r},${cy + r * .55} ${cx - r},${cy} C${cx - r},${cy - r * .56} ${cx - r * .55},${cy - r} ${cx},${cy - r}`;
+  draw(A, [ring(R + 14)], t0, .45, "ink goldS", { "stroke-width": 9 });
+  draw(A, ["M262,560 L232,540", "M250,610 L218,606", "M818,560 L848,540", "M830,610 L862,606"], t0 + .3, .12, "ink thin goldS");
+
+  write(A, "SEMAK PERLINDUNGAN", 540, 300, 80, t0 + .35, .45);
+  write(A, "KEWANGAN ANDA HARI INI", 540, 395, 80, t0 + .82, .5, "head", 920, GOLD_T);
+  write(A, "Nurul Jannah", 540, 1192, 74, t0 + 1.35, .35);
+  const role = el("text", { x: 540, y: 1240, "font-family": "Montserrat", "font-weight": 600, "font-size": 30, fill: "#5a6478", "text-anchor": "middle", "letter-spacing": "1" }, S5);
+  role.textContent = "Perunding Kewangan Holistik";
+  fadeNode(role, t0 + 1.5, .3);
+
+  // WhatsApp button
+  const pill = el("g", {}, S5), PY = 1338;
+  el("rect", { x: 160, y: PY - 56, width: 760, height: 112, rx: 56, fill: "url(#cta)" }, pill);
+  el("rect", { x: 167, y: PY - 49, width: 746, height: 98, rx: 49, fill: "none", stroke: GOLD, "stroke-width": 3 }, pill);
+  const ic = el("g", { transform: `translate(236,${PY})` }, pill);
+  el("circle", { r: 36, fill: "#25d366" }, ic);
+  el("path", { d: "M-15,15 L-19,24 L-9,20 A20,20 0 1 0 -15,15 Z", fill: "none", stroke: "#fff", "stroke-width": 4.5, "stroke-linejoin": "round" }, ic);
+  el("path", { d: "M-8,-9 C-10,-2 -2,9 7,9 L10,5 L5,1 L2,4 C-2,3 -4,0 -5,-3 L-2,-6 L-5,-11 Z", fill: "#fff" }, ic);
+  const pt = el("text", { x: 296, y: PY + 15, "font-family": "Montserrat" }, pill);
+  const a1 = el("tspan", { "font-weight": 600, "font-size": 32, fill: GOLD_L }, pt); a1.textContent = "WhatsApp  ";
+  const a2 = el("tspan", { "font-weight": 800, "font-size": 46, fill: "#ffffff" }, pt); a2.textContent = "012-394 7764";
+  const PT = t0 + 1.55;
+  updaters.push(t => {
+    const k = prog(t, PT, .4);
+    pill.style.opacity = k > 0 ? Math.min(1, k * 3) : 0;
+    const pulse = 1 + .018 * Math.max(0, Math.sin((t - PT - .6) * 4.5));
+    pill.setAttribute("transform", `translate(540,${PY}) scale(${(k > 0 ? .6 + .4 * easeBack(k) : .6) * pulse}) translate(-540,${-PY})`);
+  });
+  const link = el("text", { x: 540, y: 1436, "font-family": "Montserrat", "font-weight": 700, "font-size": 30, fill: NAVY, "text-anchor": "middle" }, S5);
+  link.textContent = "wa.me/60123947764";
+  const reg = el("text", { x: 540, y: 1478, "font-family": "Montserrat", "font-weight": 500, "font-size": 22, fill: "#6b7385", "text-anchor": "middle" }, S5);
+  reg.textContent = "FIMM F02024801  ·  Ejen AIA PUBLIC Takaful 8431Q";
+  fadeNode(link, t0 + 1.8, .3); fadeNode(reg, t0 + 1.9, .3);
 })();
 
 // ======================= hand holding a marker =======================
@@ -501,7 +555,7 @@ function toWorld(node, x, y) {
 }
 
 function sceneTransforms(t) {
-  const starts = [0, T.s2, T.s3, T.s4];
+  const starts = [0, T.s2, T.s3, T.s4, T.s5];
   scenes.forEach((g, i) => {
     const s = starts[i], next = starts[i + 1];
     let x = 0;
@@ -560,7 +614,8 @@ function render(t) {
   hand.setAttribute("transform", `translate(${pos.x},${pos.y})`);
 }
 window.render = render;
-window.ready = Promise.all(["700 80px Kalam", "700 40px Caveat", "700 40px Montserrat"].map(f => document.fonts.load(f)))
+const photoReady = new Promise(r => { const im = new Image(); im.onload = im.onerror = r; im.src = PHOTO; });
+window.ready = Promise.all(["700 80px Kalam", "700 40px Caveat", "700 40px Montserrat", "800 40px Montserrat"].map(f => document.fonts.load(f)).concat([photoReady]))
   .then(() => { build(); render(0); return true; });
 </script>
 </body>

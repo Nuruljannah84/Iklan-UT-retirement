@@ -1,20 +1,18 @@
 # Protect Your Savings Before Life Happens: 20s whiteboard video
 
-`protect-your-savings.mp4` is 1080×1920 (9:16), 30 fps, exactly 20.0 s, H.264 + AAC, loudness −14 LUFS.
+`protect-your-savings.mp4` is 1080×1920 (9:16), 30 fps, exactly 20.0 s, H.264 + AAC, loudness −14 LUFS,
+with a **Bahasa Melayu** voiceover.
+`protect-your-savings-subtitle.mp4` is the same video with karaoke subtitles on the scene-3 line.
 
-| Time | Scene | On-screen text |
+| Time | Scene | Voiceover (BM) |
 |---|---|---|
-| 0.0–5.95s | Professional drops RM coins into a savings jar, question mark appears | YOU WORK HARD TO BUILD YOUR SAVINGS. |
-| 5.95–10.4s | Hospital, patient, medical bills, coins flow out of the jar | UNEXPECTED RISKS. UNEXPECTED COSTS. |
-| 10.4–15.35s | Lightning "event" drains three jars: Emergency Fund, Investment, Retirement | ONE EVENT CAN AFFECT YOUR ENTIRE FINANCIAL PLAN. |
-| 15.35–20s | Shield drawn around savings, investment and retirement icons, then the CTA | DON'T JUST BUILD WEALTH. PROTECT IT. / Start Reviewing Your Financial Protection Today |
+| 0–4.6s | Professional saves coins in a jar, question mark | Bertahun kita kumpul simpanan. Apa jadi kalau tiba-tiba berlaku krisis kewangan? |
+| 4.6–9.9s | Hospital, patient, bills, coins flow out | Kecemasan perubatan, penyakit kritikal, atau hilang pendapatan, boleh habiskan simpanan anda. |
+| 9.9–13.8s | Lightning drains Emergency Fund / Investment / Retirement jars | Dana kecemasan, pelaburan dan persaraan, semuanya boleh terjejas. |
+| 13.8–16.6s | Shield around savings, investment, retirement | Jangan sekadar bina kekayaan. Lindunginya juga. |
+| 16.6–20s | End card: photo, name, WhatsApp 012-394 7764, wa.me link, FIMM / takaful code | Semak perlindungan kewangan anda hari ini. |
 
-Voiceover lines start at 0.20, 6.15, 10.55 and 15.50 s.
-
-`protect-your-savings-subtitle.mp4` is the same video with karaoke-style subtitles on the scene-3 line only
-("Without proper financial protection … boleh terjejas", 10.5–15.4 s). The text is white on a navy pill and the
-word being spoken turns gold. Subtitles are switched on with `SUBS=1 node frames.js …`. The words and their timings
-are in `SUBS` in `scene.html`.
+The on-screen headlines stay in English, except the end card, which is in BM.
 
 ## Rebuild
 
@@ -23,15 +21,17 @@ pip install kokoro-onnx soundfile
 ./build.sh <models_dir> <work_dir>
 ```
 
-`models_dir` must contain `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the
-kokoro-onnx `model-files-v1.0` release. The build also needs Node with Playwright/Chromium and ffmpeg.
+`models_dir` must contain `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the kokoro-onnx `model-files-v1.0`
+release. The build also needs Node with Playwright/Chromium and ffmpeg built with rubberband. It renders both versions.
 
 | File | Role |
 |---|---|
-| `tts.py` | Voiceover (Kokoro TTS, voice `bf_emma`). English goes through espeak; Malay words use hand-written Malay IPA (edit `MALAY`) |
+| `tts_ms.py` | BM voiceover. Kokoro has no Malay voice, so every word is written as Malaysian Malay IPA (`IPA` dict) and read by the `ef_dora` voice, chosen because it scored best under Malay speech recognition |
+| `tts.py` | Earlier Manglish voiceover (English parts via espeak, Malay words via IPA) |
 | `music.py` | Synthesised background music: 96 BPM, D major, I–V–vi–IV |
-| `scene.html` | The whole animation as SVG with a `render(t)` timeline (edit the text, drawings and timing here) |
-| `frames.js` | Renders each frame in headless Chromium and pipes it to ffmpeg |
-| `build.sh` | Voiceover → music → mix (ducked, loudness-normalised) → frames → mux |
+| `scene.html` | The whole animation as SVG with a `render(t)` timeline. Scenes 1–4 are laid out on a design timeline `D` and warped onto the real timing `T`. Scene 5 is the end card. `SUBS` holds the subtitles |
+| `frames.js` | Renders each frame in headless Chromium and pipes it to ffmpeg (`SUBS=1` adds subtitles) |
+| `build.sh` | Voiceover → music → mix (ducked, loudness-normalised) → frames → mux, for both versions |
 
+The end-card photo is `../../images/nurul-jannah.webp`.
 Fonts (Kalam, Caveat, Montserrat) come from Google Fonts under the SIL Open Font License.
