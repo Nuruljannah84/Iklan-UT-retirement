@@ -23,7 +23,7 @@ const fs = require("fs"), path = require("path");
       await page.screenshot({ path: path.join(dir, `t${(+t).toFixed(2)}.png`) });
     }
   } else {
-    const out = args[0], fps = +(args[1] || 30), total = Math.round(20 * fps);
+    const out = args[0], fps = +(args[1] || 30), dur = await page.evaluate(() => window.T_END || 20), total = Math.round(dur * fps);
     const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", String(fps), "-i", "-",
       "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out],
       { stdio: ["pipe", "inherit", "inherit"] });

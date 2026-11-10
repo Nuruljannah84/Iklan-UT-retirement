@@ -1,12 +1,13 @@
-"""Synthesise a soft, inspiring corporate instrumental: exactly 20 s, 96 BPM, D major.
-I-V-vi-IV (D A Bm G) twice; piano + pad from the start, plucked arpeggio and a soft
+"""Synthesise a soft, inspiring corporate instrumental, 96 BPM, D major (2.5 s per bar).
+I-V-vi-IV (D A Bm G) looped; piano + pad from the start, plucked arpeggio and a soft
 pulse join for the build, resolving on D for the call to action.
-Usage: python3 music.py out.wav
+Usage: python3 music.py out.wav [seconds, default 20]
 """
 import sys
 import numpy as np, soundfile as sf
 
-SR, DUR, BPM = 44100, 20.0, 96
+SR, BPM = 44100, 96
+DUR = float(sys.argv[2]) if len(sys.argv) > 2 else 20.0
 BEAT = 60 / BPM
 BAR = 4 * BEAT
 t_all = np.arange(int(SR * DUR)) / SR
@@ -58,10 +59,11 @@ CHORDS = [
     (50, [62, 66, 69, 74]), (45, [61, 64, 69, 73]),
     (47, [62, 66, 71, 74]), (43, [62, 67, 71, 74]),
 ]
-for bar in range(8):
+NB = int(round(DUR / BAR))
+for bar in range(NB):
     t0 = bar * BAR
     root, notes = CHORDS[bar % 4]
-    last = bar == 7
+    last = bar == NB - 1
     if last: root, notes = 50, [62, 66, 69, 74, 78]
     for m in notes:
         add(pad(m, BAR if not last else 1.6), t0, pan=rng.uniform(-.4, .4), gain=0.018)
@@ -73,14 +75,14 @@ for bar in range(8):
             add(piano(m, BEAT * 1.5, .6), t0 + 2 * BEAT + j * 0.012, pan=-.2 + .1 * j, gain=0.05)
     add(piano(root, BAR * 0.9), t0, gain=0.06)
     # plucked arpeggio from bar 2 (builds), 8th notes
-    if 1 <= bar <= 6:
+    if 1 <= bar <= NB - 2:
         arp = [notes[0] + 12, notes[1] + 12, notes[2] + 12, notes[3] + 12]
         seq = arp + arp[::-1]
         for k in range(8):
             add(pluck(seq[k]), t0 + k * BEAT / 2, pan=0.35 if k % 2 else -0.35,
                 gain=(0.02 if bar < 3 else 0.03) * (1 if k % 2 == 0 else .7))
     # soft pulse in the build (bars 3-6)
-    if 3 <= bar <= 6:
+    if 3 <= bar <= NB - 2:
         for b in (0, 2):
             add(kick(), t0 + b * BEAT, gain=0.16)
         for k in range(8):
@@ -97,6 +99,6 @@ wet = np.stack([np.fft.irfft(np.fft.rfft(mix[:, c], nfft) * np.fft.rfft(ir[:, c]
 out = 0.78 * mix + 0.32 * wet
 out[: int(SR * 0.4)] *= np.linspace(0, 1, int(SR * 0.4))[:, None]          # fade in
 fo = int(SR * 1.2)
-out[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5                            # fade out to 20.0 s
+out[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5                            # fade out to the end
 out = np.tanh(out / np.abs(out).max() * 1.2) * 0.85
 sf.write(sys.argv[1], out.astype(np.float32), SR)

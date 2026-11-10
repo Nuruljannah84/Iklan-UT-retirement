@@ -59,9 +59,11 @@
 <script>
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#1d1d1f", NAVY = "#1b2a4a", GOLD = "#c9a227", GOLD_T = "#b08a17", GOLD_L = "#f1d97a", SKIN = "#f4d8c2";
-// Actual scene start times (follow the Malay voiceover). Scenes 1-4 were laid out on the design
-// timeline D and are stretched/compressed onto T at build time (see warpScenes).
-const T = window.TIMING || { s2: 4.60, s3: 9.92, s4: 13.79, s5: 16.59, end: 20, pan: 0.5 };
+// Scene start times follow the consultant's own voiceover (voice.py), which starts at 0.25 s.
+// Drawings in scenes 1 and 4 were laid out on the design timeline D and are warped onto T;
+// everything created inside at(...) uses real time and is synced to the spoken words.
+const T = window.TIMING || { s2: 5.68, s3: 11.43, s4: 15.75, s5: 19.76, end: 25, pan: 0.5 };
+window.T_END = T.end;
 const D = { s2: 5.95, s3: 10.38, s4: 15.35, s5: 18.75 };
 const PHOTO = "../../images/nurul-jannah.webp";
 
@@ -82,13 +84,18 @@ const prog = (t, a, d) => clamp((t - a) / d);
 const updaters = []; // custom per-frame animation functions
 const items = [];   // drawable things on the timeline
 const marks = [];
+let ABS = false;
+function at(fn) {           // build items on the real timeline (not warped)
+  const u0 = updaters.length; ABS = true; fn(); ABS = false;
+  for (let j = u0; j < updaters.length; j++) updaters[j].abs = true;
+}
 function mark() { marks.push([items.length, updaters.length]); }
 // Map each scene's design window [a, b] onto its real window [na, nb].
 function warpScenes(wins) {
   wins.forEach(([a, b, na, nb], i) => {
     const k = (nb - na) / (b - a), [i0, u0] = marks[i], [i1, u1] = marks[i + 1];
-    for (let j = i0; j < i1; j++) { items[j].start = na + (items[j].start - a) * k; items[j].dur *= k; }
-    for (let j = u0; j < u1; j++) { const f = updaters[j]; updaters[j] = t => f(a + (t - na) / k); }
+    for (let j = i0; j < i1; j++) if (!items[j].abs) { items[j].start = na + (items[j].start - a) * k; items[j].dur *= k; }
+    for (let j = u0; j < u1; j++) if (!updaters[j].abs) { const f = updaters[j]; updaters[j] = t => f(a + (t - na) / k); }
   });
 }
 
@@ -98,19 +105,19 @@ function draw(group, ds, start, dur, cls = "ink", extra = {}) {
   const lens = paths.map(p => p.getTotalLength());
   const total = lens.reduce((a, b) => a + b, 0);
   paths.forEach((p, i) => { p.style.strokeDasharray = lens[i] + 1; });
-  const it = { kind: "path", paths, lens, total, start, dur, hand: true };
+  const it = { kind: "path", paths, lens, total, start, dur, hand: true, abs: ABS };
   items.push(it);
   return it;
 }
 // fills that fade in after the outline ("colouring in")
 function fill(group, d, color, start, dur = .35, extra = {}) {
   const p = el("path", Object.assign({ d, fill: color, stroke: "none" }, extra), group);
-  items.push({ kind: "fade", node: p, start, dur, to: extra.opacity ? +extra.opacity : 1 });
+  items.push({ kind: "fade", node: p, start, dur, to: extra.opacity ? +extra.opacity : 1, abs: ABS });
   p.style.opacity = 0;
   return p;
 }
 function fadeNode(node, start, dur = .35, to = 1) {
-  items.push({ kind: "fade", node, start, dur, to }); node.style.opacity = 0; return node;
+  items.push({ kind: "fade", node, start, dur, to, abs: ABS }); node.style.opacity = 0; return node;
 }
 // handwritten text: revealed left-to-right with the hand at the leading edge
 let clipId = 0;
@@ -124,7 +131,7 @@ function write(group, txt, x, y, size, start, dur, cls = "head", maxW = 920, col
   const cp = el("clipPath", { id }, document.querySelector("defs"));
   const r = el("rect", { x: x - w / 2 - 10, y: y - size * 1.2, width: 0, height: size * 1.7 }, cp);
   tx.setAttribute("clip-path", `url(#${id})`);
-  const it = { kind: "text", node: tx, rect: r, x0: x - w / 2 - 10, w: w + 20, y, size, start, dur, hand: true };
+  const it = { kind: "text", node: tx, rect: r, x0: x - w / 2 - 10, w: w + 20, y, size, start, dur, hand: true, abs: ABS };
   items.push(it);
   return it;
 }
@@ -141,12 +148,15 @@ art = scenes.map(s => el("g", { filter: "url(#rough)" }, s)); // sketchy line la
 fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i]); return g; });
 
 mark();
-// ======================= SCENE 1: you build your savings =======================
+// ======================= SCENE 1: bertahun kita kumpul simpanan =======================
 (function () {
   const t0 = 0.25, A = art[0], F = fills[0];
-  write(A, "YOU WORK HARD TO", 540, 330, 84, t0, .95);
-  const l2 = write(A, "BUILD YOUR SAVINGS.", 540, 435, 84, t0 + 1.0, 1.0);
-  draw(A, ["M250,470 C420,458 640,456 840,466"], t0 + 2.05, .3, "ink goldS", { "stroke-width": 9 });
+  at(() => {
+    write(A, "BERTAHUN KITA", 540, 300, 84, 0.40, .6);
+    write(A, "KUMPUL SIMPANAN.", 540, 400, 84, 1.12, .75);
+    draw(A, ["M255,436 C420,424 640,422 825,432"], 1.9, .25, "ink goldS", { "stroke-width": 9 });
+    write(A, "TAPI, APA JADI KALAU...?", 540, 505, 70, 3.2, .7, "head", 920, GOLD_T);
+  });
 
   // person (professional in hijab + blazer), facing right
   const P = 2.35;
@@ -182,7 +192,7 @@ mark();
   ], J, .75);
   draw(ja, ["M-28,-287 L28,-287"], J + .76, .08, "ink", { stroke: "#ffffff", "stroke-width": 7 });
   draw(ja, ["M-100,-185 C-104,-145 -104,-100 -100,-62"], J + .8, .12, "ink thin", { stroke: "#b9c4d6" });
-  write(ja, "SAVINGS", 0, -148, 46, J + .85, .45, "label", 150);
+  write(ja, "SIMPANAN", 0, -148, 44, J + .85, .45, "label", 150);
 
   // coins dropping from the hand into the jar, level rises
   const drops = [3.75, 4.35, 4.95];
@@ -212,132 +222,140 @@ mark();
 })();
 
 mark();
-// ======================= SCENE 2: the reality =======================
-(function () {
-  const t0 = D.s2 + .3, A = art[1], F = fills[1];
-  write(A, "UNEXPECTED RISKS.", 540, 330, 84, t0, .75);
-  write(A, "UNEXPECTED COSTS.", 540, 435, 84, t0 + .8, .75, "head", 920, GOLD_T);
+// ======================= SCENE 2: kecemasan, penyakit, hilang pendapatan =======================
+at(function () {
+  const A = art[1], F = fills[1];
+  write(A, "KECEMASAN PERUBATAN,", 540, 290, 76, 5.85, .6);
+  write(A, "PENYAKIT KRITIKAL,", 540, 380, 76, 7.15, .55);
+  write(A, "HILANG PENDAPATAN.", 540, 470, 76, 8.4, .55, "head", 920, GOLD_T);
 
-  // hospital
-  const H = t0 + .35;
-  fill(F, "M120,960 L120,660 L480,660 L480,960 Z", "#e7edf6", H + .7);
-  fill(F, "M265,960 L265,890 L335,890 L335,960 Z", NAVY, H + .75);
+  // hospital ("kecemasan perubatan")
+  const H = 6.48;
+  fill(F, "M120,960 L120,660 L480,660 L480,960 Z", "#e7edf6", H + .6);
+  fill(F, "M265,960 L265,890 L335,890 L335,960 Z", NAVY, H + .62);
   const winds = [[155, 700], [270, 700], [385, 700], [155, 790], [385, 790], [155, 880], [385, 880]];
-  winds.forEach(([x, y]) => fill(F, `M${x},${y} h60 v50 h-60 Z`, "#c4d1e6", H + .75));
+  winds.forEach(([x, y]) => fill(F, `M${x},${y} h60 v50 h-60 Z`, "#c4d1e6", H + .62));
   draw(A, ["M120,960 L120,660 L480,660 L480,960", "M98,660 L502,660", "M80,960 L520,960",
     "M265,960 L265,890 L335,890 L335,960",
-    ...winds.map(([x, y]) => `M${x},${y} h60 v50 h-60 Z`)], H, .75);
-  const sign = el("circle", { cx: 300, cy: 600, r: 44, fill: NAVY }, F); fadeNode(sign, H + .55, .2);
-  draw(A, ["M300,556 C325,556 344,575 344,600 C344,625 325,644 300,644 C275,644 256,625 256,600 C256,575 275,556 300,556"], H + .5, .15);
-  draw(A, ["M300,578 L300,622", "M278,600 L322,600"], H + .65, .15, "ink goldS", { "stroke-width": 12 });
+    ...winds.map(([x, y]) => `M${x},${y} h60 v50 h-60 Z`)], H, .5);
+  const sign = el("circle", { cx: 300, cy: 600, r: 44, fill: NAVY }, F); fadeNode(sign, H + .55, .15);
+  draw(A, ["M300,556 C325,556 344,575 344,600 C344,625 325,644 300,644 C275,644 256,625 256,600 C256,575 275,556 300,556"], H + .5, .08);
+  draw(A, ["M300,578 L300,622", "M278,600 L322,600"], H + .58, .08, "ink goldS", { "stroke-width": 12 });
 
-  // patient in bed
-  const B = t0 + 1.1;
-  fill(F, "M228,1240 C300,1170 450,1180 545,1240 L545,1300 L228,1300 Z", "#d7e0ef", B + .7);
-  fill(F, "M152,1195 C152,1170 172,1155 192,1155 C214,1155 230,1172 230,1195 C230,1218 214,1235 192,1235 C170,1235 152,1218 152,1195 Z", SKIN, B + .7);
+  // patient in bed ("penyakit kritikal")
+  const B = 7.72;
+  fill(F, "M228,1240 C300,1170 450,1180 545,1240 L545,1300 L228,1300 Z", "#d7e0ef", B + .55);
+  fill(F, "M152,1195 C152,1170 172,1155 192,1155 C214,1155 230,1172 230,1195 C230,1218 214,1235 192,1235 C170,1235 152,1218 152,1195 Z", SKIN, B + .55);
   draw(A, [
     "M110,1170 L110,1380", "M110,1300 L565,1300", "M565,1250 L565,1380", "M130,1240 L545,1240",
     "M130,1240 C125,1215 140,1200 160,1205",
     "M152,1195 C152,1170 172,1155 192,1155 C214,1155 230,1172 230,1195 C230,1218 214,1235 192,1235 C170,1235 152,1218 152,1195",
     "M228,1240 C300,1170 450,1180 545,1240",
     "M172,1190 L184,1190", "M200,1190 L212,1190", "M180,1218 Q192,1210 204,1218",
-  ], B, .75);
-  draw(A, ["M208,1212 L262,1182"], B + .78, .1, "ink thin", { stroke: NAVY });
-  draw(A, ["M150,1150 c-6,10 -6,16 0,18 c6,-2 6,-8 0,-18", "M240,1140 l10,-14", "M255,1152 l16,-6"], B + .9, .2, "ink thin goldS");
+  ], B, .55);
+  draw(A, ["M208,1212 L262,1182"], B + .56, .06, "ink thin", { stroke: NAVY });
+  draw(A, ["M150,1150 c-6,10 -6,16 0,18 c6,-2 6,-8 0,-18", "M240,1140 l10,-14", "M255,1152 l16,-6"], B + .62, .12, "ink thin goldS");
+
+  // savings jar ("hilang pendapatan" ... "boleh habiskan simpanan anda")
+  const J = 8.98, jx = 820, jb = 1400, js = 1.0;
+  const jf = jar(F, jx, jb, js), ja = jar(A, jx, jb, js);
+  fill(jf, "M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268 Z", "#eef3fb", J + .45, .25, { opacity: .9 });
+  const lvl = el("g", { "clip-path": "url(#jarInside)" }, jf);
+  const gr = el("rect", { x: -130, width: 260, fill: "url(#goldFill)" }, lvl);
+  const pr = el("rect", { x: -130, width: 260, fill: "url(#coins)" }, lvl);
+  fadeNode(lvl, J + .45, .25);
+  draw(ja, ["M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268", "M-90,-268 L90,-268"], J, .45);
+  write(ja, "SIMPANAN", 0, -135, 40, J + .47, .25, "label", 150);
 
   // medical bills
-  const M = t0 + 1.75;
+  const M = 9.72;
   const bill = (x, y, r, amt) => {
     const g = el("g", { transform: `translate(${x},${y}) rotate(${r})` }, A);
     const gf = el("g", { transform: `translate(${x},${y}) rotate(${r})` }, F);
-    fill(gf, "M-80,-105 L80,-105 L80,105 L-80,105 Z", "#ffffff", M + .3);
-    draw(g, ["M-80,-105 L80,-105 L80,105 L-80,105 Z", "M-55,-60 L55,-60", "M-55,-30 L40,-30", "M-55,0 L50,0"], M, .35);
-    draw(g, ["M-55,48 L55,48"], M + .35, .08, "ink thin");
-    write(g, amt, 0, 88, 40, M + .42, .3, "label", 140, GOLD_T);
+    fill(gf, "M-80,-105 L80,-105 L80,105 L-80,105 Z", "#ffffff", M + .2);
+    draw(g, ["M-80,-105 L80,-105 L80,105 L-80,105 Z", "M-55,-60 L55,-60", "M-55,-30 L40,-30", "M-55,0 L50,0"], M, .25);
+    draw(g, ["M-55,48 L55,48"], M + .25, .05, "ink thin");
+    write(g, amt, 0, 88, 40, M + .3, .22, "label", 140, GOLD_T);
     return g;
   };
   bill(660, 790, -8, "RM 18,000");
   bill(800, 840, 7, "RM 9,500");
   const billT = el("text", { x: 660, y: 735, "font-family": "Kalam", "font-weight": 700, "font-size": 34, "text-anchor": "middle", fill: NAVY, transform: "rotate(-8 660 790)" }, A);
-  billT.textContent = "BILL"; fadeNode(billT, M + .3, .2);
+  billT.textContent = "BIL"; fadeNode(billT, M + .2, .15);
 
-  // savings jar losing money
-  const J = t0 + .9, jx = 820, jb = 1400, js = 1.0;
-  const jf = jar(F, jx, jb, js), ja = jar(A, jx, jb, js);
-  fill(jf, "M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268 Z", "#eef3fb", J + .6, .3, { opacity: .9 });
-  const lvl = el("g", { "clip-path": "url(#jarInside)" }, jf);
-  const gr = el("rect", { x: -130, width: 260, fill: "url(#goldFill)" }, lvl);
-  const pr = el("rect", { x: -130, width: 260, fill: "url(#coins)" }, lvl);
-  fadeNode(lvl, J + .6, .3);
-  draw(ja, ["M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268", "M-90,-268 L90,-268"], J, .6);
-  write(ja, "SAVINGS", 0, -135, 42, J + .62, .3, "label", 150);
-  const FL = t0 + 2.2;
+  // money drains out of the jar towards the hospital and bills
+  const FL = 10.3;
   updaters.push(t => {
-    const h = lerp(215, 55, easeIO(prog(t, FL, 2.0)));
+    const h = lerp(215, 55, easeIO(prog(t, FL, 1.25)));
     [gr, pr].forEach(r => { r.setAttribute("y", -h); r.setAttribute("height", h + 20); });
   });
-  // flow arrow from jar to hospital/bills, coins travel along it
-  const flow = draw(A, ["M770,1110 C700,1060 600,1060 520,960"], FL - .25, .35, "ink goldS", { "stroke-width": 7, "stroke-dasharray": "1 1" });
-  draw(A, ["M520,960 L548,968", "M520,960 L522,990"], FL + .1, .1, "ink goldS", { "stroke-width": 7 });
+  const flow = draw(A, ["M770,1110 C700,1060 600,1060 520,960"], FL - .02, .25, "ink goldS", { "stroke-width": 7 });
+  draw(A, ["M520,960 L548,968", "M520,960 L522,990"], FL + .24, .06, "ink goldS", { "stroke-width": 7 });
   const fp = flow.paths[0];
   const cg = el("g", {}, scenes[1]);
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 8; i++) {
     const c = el("g", {}, cg);
     el("ellipse", { cx: 0, cy: 0, rx: 20, ry: 20, fill: GOLD_L, stroke: INK, "stroke-width": 4 }, c);
     el("text", { x: 0, y: 7, "font-family": "Kalam", "font-weight": 700, "font-size": 18, "text-anchor": "middle", fill: "#8a6d12" }, c).textContent = "RM";
-    const d0 = FL + i * .24;
+    const d0 = FL + .1 + i * .13;
     updaters.push(t => {
-      const k = prog(t, d0, .75);
+      const k = prog(t, d0, .6);
       c.style.opacity = (k <= 0 || k >= 1) ? 0 : Math.min(1, (1 - k) * 4, k * 6);
       const L = fp.getTotalLength(), p = fp.getPointAtLength(L * easeIO(k));
       c.setAttribute("transform", `translate(${p.x},${p.y - 18 * Math.sin(Math.PI * k)}) rotate(${k * 300 + i * 40})`);
     });
   }
-})();
+});
 
 mark();
-// ======================= SCENE 3: financial impact =======================
-(function () {
-  const t0 = D.s3 + .3, A = art[2], F = fills[2];
-  write(A, "ONE EVENT CAN AFFECT", 540, 310, 78, t0, .75);
-  write(A, "YOUR ENTIRE", 540, 405, 78, t0 + .78, .45);
-  write(A, "FINANCIAL PLAN.", 540, 500, 78, t0 + 1.25, .6, "head", 920, GOLD_T);
-
-  const jars = [[205, "Emergency Fund", .78], [540, "Investment", .7], [875, "Retirement", .74]];
-  const J = t0 + .25, base = 1300, s = .95;
-  const rects = [];
-  jars.forEach(([x, name, lv], i) => {
-    const st = J + i * .32;
+// ======================= SCENE 3: semuanya boleh terjejas =======================
+at(function () {
+  const A = art[2], F = fills[2];
+  // each jar is drawn and labelled as its name is spoken
+  const jars = [[205, "Dana Kecemasan", .78, 11.55], [540, "Pelaburan", .7, 12.6], [875, "Persaraan", .74, 13.35]];
+  const base = 1300, s = .95, rects = [];
+  jars.forEach(([x, name, lv, st], i) => {
     const jf = jar(F, x, base, s), ja = jar(A, x, base, s);
-    fill(jf, "M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268 Z", "#eef3fb", st + .5, .3, { opacity: .9 });
+    fill(jf, "M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268 Z", "#eef3fb", st + .45, .25, { opacity: .9 });
     const lvl = el("g", { "clip-path": "url(#jarInside)" }, jf);
     const gr = el("rect", { x: -130, width: 260, fill: "url(#goldFill)" }, lvl);
     const pr = el("rect", { x: -130, width: 260, fill: "url(#coins)" }, lvl);
-    fadeNode(lvl, st + .5, .3);
-    fill(jf, "M-94,-268 L94,-268 L94,-298 C94,-304 90,-306 84,-306 L-84,-306 C-90,-306 -94,-304 -94,-298 Z", NAVY, st + .5);
+    fadeNode(lvl, st + .45, .25);
+    fill(jf, "M-94,-268 L94,-268 L94,-298 C94,-304 90,-306 84,-306 L-84,-306 C-90,-306 -94,-304 -94,-298 Z", NAVY, st + .45);
     draw(ja, ["M-80,-268 L-80,-252 C-80,-236 -120,-232 -120,-205 L-120,-34 C-120,-12 -104,0 -84,0 L84,0 C104,0 120,-12 120,-34 L120,-205 C120,-232 80,-236 80,-252 L80,-268",
-      "M-94,-268 L94,-268 L94,-298 C94,-304 90,-306 84,-306 L-84,-306 C-90,-306 -94,-304 -94,-298 Z"], st, .5);
-    write(A, name, x, base + 72, 52, st + .55, .35, "label", 300);
+      "M-94,-268 L94,-268 L94,-298 C94,-304 90,-306 84,-306 L-84,-306 C-90,-306 -94,-304 -94,-298 Z"], st, .45);
+    write(A, name, x, base + 72, 50, st + .47, .35, "label", 300);
     rects.push([gr, pr, lv, i]);
   });
-  // the "event": a lightning bolt striking, then every jar drains
-  const E = t0 + 1.95;
+  write(A, "SEMUANYA BOLEH", 540, 330, 92, 14.2, .45);
+  write(A, "TERJEJAS.", 540, 455, 116, 14.7, .35, "head", 920, GOLD_T);
+
+  // the event strikes as she says "terjejas"; the jars start draining at "semuanya"
+  const E = 15.0;
   const bolt = "M560,610 L505,720 L555,720 L500,840 L620,690 L565,690 L610,610 Z";
-  fill(F, bolt, GOLD, E + .3, .15);
-  draw(A, [bolt], E, .3);
-  draw(A, ["M470,650 L440,630", "M650,650 L680,630", "M455,730 L420,735", "M665,730 L700,735"], E + .32, .15, "ink thin goldS");
-  const DR = E + .45;
+  const boltG = el("g", {}, F);
+  el("path", { d: bolt, fill: GOLD }, boltG);
+  el("path", { d: bolt, fill: "none", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round" }, boltG);
+  updaters.push(t => {
+    const k = prog(t, E, .25);
+    boltG.style.opacity = k > 0 ? 1 : 0;
+    boltG.setAttribute("transform", `translate(560,720) scale(${k > 0 ? easeBack(k) : .01}) translate(-560,-720)`);
+  });
+  const rays = draw(A, ["M470,650 L440,630", "M650,650 L680,630", "M455,730 L420,735", "M665,730 L700,735"], E + .2, .12, "ink thin goldS");
+  rays.hand = false;
+  const DR = 14.25;
   rects.forEach(([gr, pr, lv, i]) => {
     updaters.push(t => {
-      const k = easeIO(prog(t, DR + i * .12, 1.9));
+      const k = easeIO(prog(t, DR + i * .1, 1.35));
       const h = lerp(lv * 262, 0.24 * 262, k);
       [gr, pr].forEach(r => { r.setAttribute("y", -h); r.setAttribute("height", h + 20); });
     });
   });
   jars.forEach(([x], i) => {
-    const st = DR + .2 + i * .12;
-    draw(A, [`M${x},${base - 215} L${x},${base - 125}`, `M${x - 22},${base - 150} L${x},${base - 122} L${x + 22},${base - 150}`], st, .35, "ink navyS", { "stroke-width": 11 });
-    draw(A, [`M${x - 30},${base - 4} l10,-26 l12,16 l12,-24`], st + .1, .2, "ink thin");
+    const st = DR + .15 + i * .1;
+    const ar = draw(A, [`M${x},${base - 215} L${x},${base - 125}`, `M${x - 22},${base - 150} L${x},${base - 122} L${x + 22},${base - 150}`], st, .3, "ink navyS", { "stroke-width": 11 });
+    const ck = draw(A, [`M${x - 30},${base - 4} l10,-26 l12,16 l12,-24`], st + .1, .15, "ink thin");
+    ar.hand = ck.hand = false;
     for (let c = 0; c < 3; c++) {
       const g = el("g", {}, scenes[2]);
       el("ellipse", { cx: 0, cy: 0, rx: 15, ry: 15, fill: GOLD_L, stroke: INK, "stroke-width": 3.5 }, g);
@@ -349,14 +367,17 @@ mark();
       });
     }
   });
-})();
+});
 
 mark();
-// ======================= SCENE 4: protect it =======================
+// ======================= SCENE 4: jangan sekadar bina kekayaan, lindunginya juga =======================
 (function () {
   const t0 = D.s4 + .3, A = art[3], F = fills[3];
-  write(A, "DON'T JUST BUILD WEALTH.", 540, 330, 80, t0, .95);
-  write(A, "PROTECT IT.", 540, 460, 116, t0 + 1.0, .6, "head", 920, GOLD_T);
+  at(() => {
+    write(A, "JANGAN SEKADAR", 540, 300, 84, 15.95, .55);
+    write(A, "BINA KEKAYAAN.", 540, 400, 84, 17.05, .55);
+    write(A, "LINDUNGINYA JUGA.", 540, 515, 92, 18.75, .55, "head", 920, GOLD_T);
+  });
 
   // icons: savings jar, investment chart, retirement
   const I = t0 + .25;
@@ -378,7 +399,7 @@ mark();
   draw(A, ["M440,1150 L640,1150", "M470,1150 C470,1110 502,1080 540,1080 C578,1080 610,1110 610,1150",
     "M540,1062 L540,1036", "M488,1078 L472,1058", "M592,1078 L608,1058", "M458,1116 L434,1106", "M622,1116 L646,1106"], R, .35);
   const lab = (x, y, s, st) => write(A, s, x, y, 42, st, .2, "label", 220);
-  lab(385, 1058, "Savings", I + .3); lab(672, 1062, "Investment", C + .3); lab(540, 1198, "Retirement", R + .3);
+  lab(385, 1058, "Simpanan", I + .3); lab(672, 1062, "Pelaburan", C + .3); lab(540, 1198, "Persaraan", R + .3);
 
   // the shield, drawn around them
   const S = R + .4;
@@ -418,14 +439,14 @@ mark();
 })();
 
 mark();
-warpScenes([[0, D.s2, 0, T.s2], [D.s2, D.s3, T.s2, T.s3], [D.s3, D.s4, T.s3, T.s4], [D.s4, D.s5, T.s4, T.s5]]);
+warpScenes([[0, D.s2, 0, T.s2], [D.s2, D.s3, T.s2, T.s3], [D.s3, D.s4, T.s3, T.s4], [D.s4, D.s5, T.s4, T.s5]]);  // scenes 2-3 are built with at(), so nothing in them moves
 
 // ======================= subtitles (only when window.SHOW_SUBS) =======================
-// Word times (s) measured from the scene-3 voiceover, which starts at 10.04 s.
+// Approximate word times (s) of the scene-3 line in the consultant's voiceover.
 const SUBS = [
-  [["Dana", 10.04], ["kecemasan,", 10.30]],
-  [["pelaburan", 11.10], ["dan", 11.74], ["persaraan,", 11.92]],
-  [["semuanya", 12.54], ["boleh", 13.11], ["terjejas.", 13.34]],
+  [["Dana", 11.59], ["kecemasan,", 11.95]],
+  [["pelaburan", 12.75], ["dan", 13.35], ["persaraan,", 13.55]],
+  [["semuanya", 14.14], ["boleh", 14.75], ["terjejas.", 15.05]],
 ];
 const SUB_END = T.s4 + .1;
 if (window.SHOW_SUBS) (function () {
@@ -458,7 +479,7 @@ if (window.SHOW_SUBS) (function () {
 // ======================= SCENE 5: call to action with photo =======================
 (function () {
   const t0 = T.s5 + T.pan * .6, S5 = scenes[4], A = art[4], F = fills[4];
-  const cx = 540, cy = 790, R = 290, ps = .64;            // face sits near (505,640) in the 1023x1537 photo
+  const cx = 540, cy = 805, R = 290, ps = .64;            // face sits near (505,640) in the 1023x1537 photo
   const cp = el("clipPath", { id: "photoClip" }, document.querySelector("defs"));
   el("circle", { cx, cy, r: R }, cp);
   const ph = el("g", {}, F);
@@ -472,17 +493,18 @@ if (window.SHOW_SUBS) (function () {
   });
   const ring = r => `M${cx},${cy - r} C${cx + r * .56},${cy - r} ${cx + r},${cy - r * .55} ${cx + r},${cy} C${cx + r},${cy + r * .56} ${cx + r * .55},${cy + r} ${cx},${cy + r} C${cx - r * .56},${cy + r} ${cx - r},${cy + r * .55} ${cx - r},${cy} C${cx - r},${cy - r * .56} ${cx - r * .55},${cy - r} ${cx},${cy - r}`;
   draw(A, [ring(R + 14)], t0, .45, "ink goldS", { "stroke-width": 9 });
-  draw(A, ["M262,560 L232,540", "M250,610 L218,606", "M818,560 L848,540", "M830,610 L862,606"], t0 + .3, .12, "ink thin goldS");
+  draw(A, ["M262,575 L232,555", "M250,625 L218,621", "M818,575 L848,555", "M830,625 L862,621"], t0 + .3, .12, "ink thin goldS");
 
-  write(A, "SEMAK PERLINDUNGAN", 540, 300, 80, t0 + .35, .45);
-  write(A, "KEWANGAN ANDA HARI INI", 540, 395, 80, t0 + .82, .5, "head", 920, GOLD_T);
-  write(A, "Nurul Jannah", 540, 1192, 74, t0 + 1.35, .35);
-  const role = el("text", { x: 540, y: 1240, "font-family": "Montserrat", "font-weight": 600, "font-size": 30, fill: "#5a6478", "text-anchor": "middle", "letter-spacing": "1" }, S5);
+  write(A, "SEMAK PERLINDUNGAN", 540, 282, 76, 20.55, .45);
+  write(A, "KEWANGAN ANDA HARI INI", 540, 368, 76, 21.08, .55);
+  write(A, "BERSAMA SAYA", 540, 458, 80, 22.25, .42, "head", 920, GOLD_T);
+  write(A, "Nurul Jannah", 540, 1207, 74, 22.75, .35);
+  const role = el("text", { x: 540, y: 1254, "font-family": "Montserrat", "font-weight": 600, "font-size": 30, fill: "#5a6478", "text-anchor": "middle", "letter-spacing": "1" }, S5);
   role.textContent = "Perunding Kewangan Holistik";
-  fadeNode(role, t0 + 1.5, .3);
+  fadeNode(role, 22.95, .3);
 
   // WhatsApp button
-  const pill = el("g", {}, S5), PY = 1338;
+  const pill = el("g", {}, S5), PY = 1352;
   el("rect", { x: 160, y: PY - 56, width: 760, height: 112, rx: 56, fill: "url(#cta)" }, pill);
   el("rect", { x: 167, y: PY - 49, width: 746, height: 98, rx: 49, fill: "none", stroke: GOLD, "stroke-width": 3 }, pill);
   const ic = el("g", { transform: `translate(236,${PY})` }, pill);
@@ -492,18 +514,18 @@ if (window.SHOW_SUBS) (function () {
   const pt = el("text", { x: 296, y: PY + 15, "font-family": "Montserrat" }, pill);
   const a1 = el("tspan", { "font-weight": 600, "font-size": 32, fill: GOLD_L }, pt); a1.textContent = "WhatsApp  ";
   const a2 = el("tspan", { "font-weight": 800, "font-size": 46, fill: "#ffffff" }, pt); a2.textContent = "012-394 7764";
-  const PT = t0 + 1.55;
+  const PT = 23.1;
   updaters.push(t => {
     const k = prog(t, PT, .4);
     pill.style.opacity = k > 0 ? Math.min(1, k * 3) : 0;
     const pulse = 1 + .018 * Math.max(0, Math.sin((t - PT - .6) * 4.5));
     pill.setAttribute("transform", `translate(540,${PY}) scale(${(k > 0 ? .6 + .4 * easeBack(k) : .6) * pulse}) translate(-540,${-PY})`);
   });
-  const link = el("text", { x: 540, y: 1436, "font-family": "Montserrat", "font-weight": 700, "font-size": 30, fill: NAVY, "text-anchor": "middle" }, S5);
+  const link = el("text", { x: 540, y: 1450, "font-family": "Montserrat", "font-weight": 700, "font-size": 30, fill: NAVY, "text-anchor": "middle" }, S5);
   link.textContent = "wa.me/60123947764";
-  const reg = el("text", { x: 540, y: 1478, "font-family": "Montserrat", "font-weight": 500, "font-size": 22, fill: "#6b7385", "text-anchor": "middle" }, S5);
+  const reg = el("text", { x: 540, y: 1490, "font-family": "Montserrat", "font-weight": 500, "font-size": 22, fill: "#6b7385", "text-anchor": "middle" }, S5);
   reg.textContent = "FIMM F02024801  ·  Ejen AIA PUBLIC Takaful 8431Q";
-  fadeNode(link, t0 + 1.8, .3); fadeNode(reg, t0 + 1.9, .3);
+  fadeNode(link, 23.3, .3); fadeNode(reg, 23.4, .3);
 })();
 
 // ======================= hand holding a marker =======================

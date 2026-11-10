@@ -1,37 +1,36 @@
-# Protect Your Savings Before Life Happens: 20s whiteboard video
+# Protect Your Savings Before Life Happens: whiteboard video
 
-`protect-your-savings.mp4` is 1080×1920 (9:16), 30 fps, exactly 20.0 s, H.264 + AAC, loudness −14 LUFS,
-with a **Bahasa Melayu** voiceover.
-`protect-your-savings-subtitle.mp4` is the same video with karaoke subtitles on the scene-3 line.
+`protect-your-savings.mp4` is 1080×1920 (9:16), 30 fps, **25.0 s**, H.264 + AAC, loudness −14 LUFS,
+voiced by Nurul Jannah herself in Bahasa Melayu. All on-screen text is in BM, mirrors her words,
+and is written on screen as she says them.
 
-| Time | Scene | Voiceover (BM) |
-|---|---|---|
-| 0–4.6s | Professional saves coins in a jar, question mark | Bertahun kita kumpul simpanan. Apa jadi kalau tiba-tiba berlaku krisis kewangan? |
-| 4.6–9.9s | Hospital, patient, bills, coins flow out | Kecemasan perubatan, penyakit kritikal, atau hilang pendapatan, boleh habiskan simpanan anda. |
-| 9.9–13.8s | Lightning drains Emergency Fund / Investment / Retirement jars | Dana kecemasan, pelaburan dan persaraan, semuanya boleh terjejas. |
-| 13.8–16.6s | Shield around savings, investment, retirement | Jangan sekadar bina kekayaan. Lindunginya juga. |
-| 16.6–20s | End card: photo, name, WhatsApp 012-394 7764, wa.me link, FIMM / takaful code | Semak perlindungan kewangan anda hari ini. |
-
-The on-screen headlines stay in English, except the end card, which is in BM.
+| Time | Scene | Voiceover | On-screen text |
+|---|---|---|---|
+| 0–5.7s | Saving coins into a jar, question mark | Bertahun kita kumpul simpanan, tapi apa jadi kalau tiba-tiba berlaku krisis kewangan? | BERTAHUN KITA / KUMPUL SIMPANAN. / TAPI, APA JADI KALAU...? |
+| 5.7–11.4s | Hospital, patient, jar, bills, money flows out | Kecemasan perubatan, penyakit kritikal atau hilang pendapatan boleh habiskan simpanan anda. | KECEMASAN PERUBATAN, / PENYAKIT KRITIKAL, / HILANG PENDAPATAN. |
+| 11.4–15.75s | Jars labelled as named, lightning, jars drain | Dana kecemasan, pelaburan dan persaraan, semuanya boleh terjejas. | SEMUANYA BOLEH / TERJEJAS. |
+| 15.75–19.75s | Shield around simpanan / pelaburan / persaraan | Jangan sekadar bina kekayaan, lindunginya juga. | JANGAN SEKADAR / BINA KEKAYAAN. / LINDUNGINYA JUGA. |
+| 19.75–25s | End card: photo, name, WhatsApp 012-394 7764, wa.me link, FIMM / takaful code | Semak perlindungan kewangan anda hari ini bersama saya. | SEMAK PERLINDUNGAN / KEWANGAN ANDA HARI INI / BERSAMA SAYA |
 
 ## Rebuild
 
 ```bash
-pip install kokoro-onnx soundfile
-./build.sh <models_dir> <work_dir>
+pip install noisereduce soundfile scipy
+./build.sh <original_voice_recording> <work_dir>
 ```
 
-`models_dir` must contain `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the kokoro-onnx `model-files-v1.0`
-release. The build also needs Node with Playwright/Chromium and ffmpeg built with rubberband. It renders both versions.
+The voice recording is not in the repo. The build needs Node with Playwright/Chromium and ffmpeg.
+If a new recording is made, update `KEEP`/`NOISE` in `voice.py` (cut points, in seconds of the
+recording) and the times in `scene.html` (`T` plus the times inside each `at(...)` block).
 
 | File | Role |
 |---|---|
-| `tts_ms.py` | BM voiceover. Kokoro has no Malay voice, so every word is written as Malaysian Malay IPA (`IPA` dict) and read by the `ef_dora` voice, chosen because it scored best under Malay speech recognition |
-| `tts.py` | Earlier Manglish voiceover (English parts via espeak, Malay words via IPA) |
-| `music.py` | Synthesised background music: 96 BPM, D major, I–V–vi–IV |
-| `scene.html` | The whole animation as SVG with a `render(t)` timeline. Scenes 1–4 are laid out on a design timeline `D` and warped onto the real timing `T`. Scene 5 is the end card. `SUBS` holds the subtitles |
-| `frames.js` | Renders each frame in headless Chromium and pipes it to ffmpeg (`SUBS=1` adds subtitles) |
-| `build.sh` | Voiceover → music → mix (ducked, loudness-normalised) → frames → mux, for both versions |
+| `voice.py` | Cleans her recording: rumble filter, noise reduction (profile from the silence before she speaks), shortened long pauses |
+| `music.py` | Synthesised background music: 96 BPM, D major, I–V–vi–IV, any length (`music.py out.wav 25`) |
+| `scene.html` | The animation as SVG with a `render(t)` timeline. `T` = scene starts. Text and key drawings are placed on real time inside `at(...)`, synced to her words. Scenes 1 and 4 drawings are warped from a design timeline `D`. Scene 5 is the end card |
+| `frames.js` | Renders each frame in headless Chromium and pipes it to ffmpeg (`SUBS=1` adds the optional scene-3 subtitles) |
+| `build.sh` | Voice → music → mix (EQ, compression, ducked music, loudness-normalised) → frames → mux |
+| `tts.py`, `tts_ms.py` | Earlier synthetic voiceovers (Manglish and BM), kept for reference; not used by the build |
 
 The end-card photo is `../../images/nurul-jannah.webp`.
 Fonts (Kalam, Caveat, Montserrat) come from Google Fonts under the SIL Open Font License.
