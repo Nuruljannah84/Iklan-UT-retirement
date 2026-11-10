@@ -10,6 +10,7 @@ const fs = require("fs"), path = require("path");
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   const timing = fs.existsSync(path.join(__dirname, "timing.json")) ? fs.readFileSync(path.join(__dirname, "timing.json"), "utf8") : null;
   if (timing) await page.addInitScript(`window.TIMING = ${timing};`);
+  if (process.env.SUBS === "1") await page.addInitScript(`window.SHOW_SUBS = true;`);
   page.on("console", m => console.log("[page]", m.text()));
   page.on("pageerror", e => { console.error("[page error]", e.message); process.exit(1); });
   await page.goto("file://" + path.join(__dirname, "scene.html"));

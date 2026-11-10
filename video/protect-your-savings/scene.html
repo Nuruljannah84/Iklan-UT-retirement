@@ -53,6 +53,7 @@
   <rect width="1080" height="1920" fill="url(#paper)"/>
   <g id="world"></g>
   <g id="handLayer"></g>
+  <g id="subs"></g>
 </svg>
 
 <script>
@@ -411,6 +412,43 @@ fills = scenes.map((s, i) => { const g = el("g", {}, s); s.insertBefore(g, art[i
     cta.style.opacity = k > 0 ? Math.min(1, k * 3) : 0;
     cta.setAttribute("transform", `translate(540,1470) scale(${k > 0 ? .6 + .4 * easeBack(k) : .6}) translate(-540,-1470)`);
     arrow.setAttribute("transform", `translate(${8 * Math.max(0, Math.sin((t - CT - .5) * 5))},0)`);
+  });
+})();
+
+// ======================= subtitles (only when window.SHOW_SUBS) =======================
+// Word times (s) measured from the scene-3 voiceover, which starts at 10.55 s.
+const SUBS = [
+  [["Without", 10.55], ["proper", 10.82]],
+  [["financial", 11.08], ["protection,", 11.52]],
+  [["your", 12.05], ["emergency", 12.17], ["fund,", 12.70], ["investment", 13.05]],
+  [["and", 13.57], ["retirement", 13.76], ["savings", 14.08]],
+  [["boleh", 14.55], ["terjejas.", 14.87]],
+];
+const SUB_END = T.s4 + .1;
+if (window.SHOW_SUBS) (function () {
+  const layer = document.getElementById("subs"), Y = 1480;
+  SUBS.forEach((words, ci) => {
+    const g = el("g", {}, layer);
+    const pill = el("rect", { y: Y - 46, height: 92, rx: 46, fill: NAVY, "fill-opacity": .93 }, g);
+    const tx = el("text", { x: 540, y: Y + 16, "font-family": "Montserrat", "font-weight": 700, "font-size": 46, "text-anchor": "middle" }, g);
+    const spans = words.map(([w], i) => {
+      const sp = el("tspan", {}, tx); sp.textContent = (i ? " " : "") + w; sp.style.fill = "#ffffff"; return sp;
+    });
+    const w = tx.getComputedTextLength() + 72;
+    pill.setAttribute("x", 540 - w / 2); pill.setAttribute("width", w);
+    const on = words[0][1] - .05, off = ci < SUBS.length - 1 ? SUBS[ci + 1][0][1] - .05 : SUB_END;
+    updaters.push(t => {
+      const vis = t >= on && t < off;
+      g.style.display = vis ? "" : "none";
+      if (!vis) return;
+      const k = easeOut(prog(t, on, .15)), fade = ci === SUBS.length - 1 ? 1 - prog(t, off - .2, .2) : 1;
+      g.style.opacity = k * fade;
+      g.setAttribute("transform", `translate(540,${Y}) scale(${.92 + .08 * k}) translate(-540,${-Y})`);
+      words.forEach(([, wt], i) => {
+        const next = i < words.length - 1 ? words[i + 1][1] : off;
+        spans[i].style.fill = t >= wt && t < next ? GOLD_L : "#ffffff";
+      });
+    });
   });
 })();
 

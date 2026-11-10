@@ -28,4 +28,11 @@ ffmpeg -v error -y -i "$W/vo1f.wav" -i "$W/vo2f.wav" -i "$W/vo3f.wav" -i "$W/vo4
 node frames.js "$W/video_noaudio.mp4" 30
 ffmpeg -v error -y -i "$W/video_noaudio.mp4" -i "$W/mix.wav" -c:v copy -c:a aac -b:a 192k -shortest -t 20 \
   -movflags +faststart protect-your-savings.mp4
-ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate -of compact protect-your-savings.mp4
+
+# 5. second version with scene-3 subtitles
+SUBS=1 node frames.js "$W/video_subs_noaudio.mp4" 30
+ffmpeg -v error -y -i "$W/video_subs_noaudio.mp4" -i "$W/mix.wav" -c:v copy -c:a aac -b:a 192k -shortest -t 20 \
+  -movflags +faststart protect-your-savings-subtitle.mp4
+for f in protect-your-savings.mp4 protect-your-savings-subtitle.mp4; do
+  ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate -of compact "$f"
+done

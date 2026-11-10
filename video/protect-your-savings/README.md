@@ -11,6 +11,11 @@
 
 Voiceover lines start at 0.20, 6.15, 10.55 and 15.50 s.
 
+`protect-your-savings-subtitle.mp4` is the same video with karaoke-style subtitles on the scene-3 line only
+("Without proper financial protection … boleh terjejas", 10.5–15.4 s). The text is white on a navy pill and the
+word being spoken turns gold. Subtitles are switched on with `SUBS=1 node frames.js …`. The words and their timings
+are in `SUBS` in `scene.html`.
+
 ## Rebuild
 
 ```bash
