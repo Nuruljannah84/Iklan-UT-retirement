@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b2540">
+  <title>Nurul Jannah Mahmud | Jannah's Wealth Partners</title>
+  <meta name="description" content="Kad digital Nurul Jannah Mahmud: perlindungan takaful, pelaburan Unit Trust dan persaraan PRS. Hubungi terus melalui WhatsApp.">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Jannah&#39;s Wealth Partners">
+  <meta property="og:title" content="Nurul Jannah Mahmud | Kad Digital">
+  <meta property="og:description" content="Semak pilihan takaful, Unit Trust dan PRS: hubungi terus, simpan contact atau kenali peluang kerjaya.">
+  <meta property="og:url" content="https://jannahmahmud.netlify.app/">
+  <meta property="og:image" content="https://jannahfinancial.netlify.app/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Warna utama: tukar 3 nilai --brand di bawah untuk tukar tema keseluruhan kad. */
+    :root {
+      --brand: #2a3756;
+      --brand-deep: #1b2540;
+      --brand-bright: #3c4d73;
+      --accent: #cdb07a;
+      --accent-deep: #9c7f45;
+      --ink: #1b2233;
+      --muted: #6b7080;
+      --border: #e7e2d6;
+      --paper: #ffffff;
+      --wash: #f7f6f1;
+      --tint: #f4eee2;
+      --shadow: 0 13px 48px rgba(27, 37, 64, .1);
+      --radius: 21px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+    body {
+      margin: 0; background: var(--wash); color: var(--ink);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.55; -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(84px + env(safe-area-inset-bottom));
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    h1, h2, h3 { margin: 0; line-height: 1.2; letter-spacing: -.02em; }
+    p { margin: 0; }
+    [hidden] { display: none !important; }
+    .skip-link { position: absolute; left: -999px; top: 8px; background: var(--paper); padding: 8px 12px; border-radius: 8px; z-index: 99; }
+    .skip-link:focus { left: 8px; }
+
+    .serif { font-family: "Libre Caslon Text", Georgia, serif; }
+    .accent-bar { background: var(--brand-deep); color: #e9e4d8; text-align: center; font-size: .72rem; letter-spacing: .12em; padding: 7px 16px; }
+    .topbar { background: var(--paper); border-bottom: 1px solid var(--border); }
+    .topbar-inner { max-width: 560px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; justify-content: center; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--brand-deep); }
+    .brand-mark { padding: 6px 7px; border: 1.5px solid var(--accent); color: var(--accent-deep); font-family: "Libre Caslon Text", Georgia, serif; font-size: 1.3rem; line-height: 1; }
+    .brand-text { display: flex; flex-direction: column; text-align: left; }
+    .brand-name { font-weight: 800; font-size: .86rem; letter-spacing: .14em; text-transform: uppercase; }
+    .brand-sub { font-size: .56rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-deep); margin-top: 2px; }
+
+    .container { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+    section { margin-top: 26px; }
+
+    /* ---------- Profil ---------- */
+    .profile-card { margin-top: 18px; background: var(--paper); border-radius: 26px; box-shadow: var(--shadow); padding: 30px 18px 22px; text-align: center; background-image: radial-gradient(120% 60% at 50% 0%, var(--tint), transparent 60%); }
+    .avatar-wrap { position: relative; width: 132px; height: 132px; margin: 0 auto 16px; }
+    .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; border: 4px solid var(--paper); box-shadow: 0 0 0 3px var(--accent), 0 10px 26px rgba(27,37,64,.2); background: var(--tint); }
+    .profile-seal { position: absolute; right: 2px; bottom: 6px; width: 34px; height: 34px; border-radius: 50%; background: var(--brand-deep); color: #fff; display: grid; place-items: center; border: 3px solid var(--paper); }
+    .micro-label { font-size: .68rem; letter-spacing: .14em; font-weight: 800; color: var(--accent-deep); text-transform: uppercase; }
+    h1 { font-family: "Libre Caslon Text", Georgia, serif; font-size: 1.75rem; font-weight: 700; margin-top: 8px; color: var(--brand-deep); letter-spacing: -.01em; }
+    .role { color: var(--muted); font-weight: 500; margin-top: 4px; }
+    .creds { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 10px; }
+    .cred { font-size: .72rem; font-weight: 700; background: var(--tint); color: var(--brand-deep); padding: 4px 10px; border-radius: 999px; }
+
+    .hero-actions { display: grid; gap: 10px; margin-top: 18px; }
+    .quote-cta, .primary-cta { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 0; }
+    .quote-cta { background: var(--accent); color: var(--brand-deep); box-shadow: 0 8px 20px rgba(156,127,69,.3); }
+    .primary-cta { background: var(--brand-deep); color: #fff; border: 0; }
+    .quote-cta:active, .primary-cta:active { transform: scale(.98); }
+
+    .social-title { font-size: .85rem; color: var(--muted); font-weight: 700; margin-top: 22px; }
+    .social-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(68px, 1fr)); gap: 8px; margin-top: 10px; }
+    .social-link { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border-radius: 14px; border: 1px solid var(--border); background: var(--paper); font-size: .72rem; font-weight: 600; text-decoration: none; }
+    .social-link svg { width: 22px; height: 22px; color: var(--brand); }
+
+    .hero-tools { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .utility-pill { border: 1px solid var(--border); background: var(--wash); border-radius: 999px; padding: 8px 16px; font-size: .82rem; font-weight: 700; text-decoration: none; color: var(--brand-deep); }
+    .contact-note { color: var(--muted); font-size: .85rem; margin-top: 14px; }
+
+    .intro-quote { margin-top: 22px; font-family: "Libre Caslon Text", Georgia, serif; font-size: 1.05rem; background: var(--paper); border-left: 5px solid var(--accent); border-radius: 16px; padding: 18px 20px; font-weight: 700; box-shadow: var(--shadow); }
+
+    /* ---------- Produk ---------- */
+    .section-heading h2, .form-header h2, .career-banner h2 { font-family: "Libre Caslon Text", Georgia, serif; font-weight: 700 !important; }
+    .section-heading h2 { font-size: 1.45rem; color: var(--brand-deep); }
+    .section-heading p { color: var(--muted); font-size: .88rem; margin-top: 4px; }
+    .heading-ornament { width: 44px; height: 4px; border-radius: 4px; background: var(--accent); margin-top: 10px; }
+    .group-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 18px 0 8px; }
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .product { text-align: left; background: var(--paper); border: 1px solid var(--border); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 14px rgba(15,61,52,.04); }
+    .product:hover, .product:focus-visible { border-color: var(--brand); }
+    .product-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--tint); color: var(--brand); display: grid; place-items: center; font-size: 1.25rem; }
+    .product h3 { font-size: .95rem; font-weight: 800; }
+    .product p { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+    .product .pick { font-size: .72rem; font-weight: 800; color: var(--accent-deep); margin-top: 6px; }
+
+    /* ---------- Borang ---------- */
+    .form-card { background: var(--paper); border-radius: 26px; box-shadow: var(--shadow); padding: 26px 18px; }
+    .form-header { text-align: center; }
+    .mini-icon { width: 46px; height: 46px; border-radius: 14px; background: var(--tint); color: var(--brand); display: grid; place-items: center; margin: 0 auto 12px; font-size: 1.3rem; }
+    .form-header h2 { font-size: 1.45rem; font-weight: 800; }
+    .form-header p { color: var(--muted); font-size: .88rem; margin-top: 8px; }
+    .quote-progress { margin: 20px 0 16px; }
+    .quote-progress-meta { display: flex; justify-content: space-between; font-size: .76rem; font-weight: 700; color: var(--muted); }
+    .quote-progress-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+    .quote-progress-bars span { height: 5px; border-radius: 5px; background: var(--border); }
+    .quote-progress-bars span.is-active { background: var(--brand); }
+    .quote-step-title { font-size: 1rem; font-weight: 800; margin-bottom: 14px; }
+    fieldset { border: 0; padding: 0; margin: 0 0 18px; min-width: 0; }
+    .field { margin-bottom: 14px; }
+    .field-label { display: block; font-size: .82rem; font-weight: 700; margin-bottom: 6px; padding: 0; }
+    .required { color: #b3261e; }
+    .checks-label { font-size: .75rem; color: var(--muted); margin: -2px 0 8px; }
+    .input { width: 100%; min-height: 48px; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; background: var(--paper); font-size: 16px; }
+    textarea.input { min-height: 90px; resize: vertical; }
+    .input:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+    .input.invalid { border-color: #b3261e; }
+    .selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .selector input { position: absolute; opacity: 0; pointer-events: none; }
+    .selector label { text-align: center; padding: 11px 4px; border: 1px solid var(--border); border-radius: 12px; font-size: .82rem; font-weight: 700; }
+    .selector input:checked + label { border-color: var(--brand); background: var(--tint); color: var(--brand-deep); }
+    .selector input:focus-visible + label { outline: 2px solid var(--brand); }
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .check-item { display: flex; align-items: center; gap: 8px; padding: 11px 12px; border: 1px solid var(--border); border-radius: 12px; font-size: .8rem; font-weight: 600; }
+    .check-item.wide { grid-column: 1 / -1; }
+    .check-item input { width: 18px; height: 18px; accent-color: var(--brand); flex-shrink: 0; }
+    .fields-grid { display: grid; gap: 0 12px; }
+    .dob-selects { display: grid; grid-template-columns: 1fr 1.2fr 1.2fr; gap: 8px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .privacy-note { font-size: .8rem; color: var(--muted); background: var(--wash); border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; }
+    .privacy-consent { display: flex; gap: 10px; align-items: flex-start; font-size: .78rem; color: var(--muted); margin: 6px 0 14px; }
+    .privacy-consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--brand); flex-shrink: 0; }
+    .privacy-consent a { color: var(--brand-deep); }
+    .step-actions { display: flex; gap: 10px; }
+    .form-submit { flex: 1; min-height: 52px; border: 0; border-radius: 14px; font-weight: 800; color: #fff; background: var(--brand-deep); }
+    .step-back { min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid var(--border); background: var(--paper); font-weight: 700; }
+    .disclaimer { font-size: .75rem; color: var(--muted); text-align: center; margin-top: 10px; }
+    .quote-help { text-align: center; font-size: .8rem; color: var(--muted); margin-top: 16px; }
+    .quote-help button { border: 0; background: none; color: var(--brand-deep); font-weight: 800; text-decoration: underline; padding: 0; }
+
+    /* ---------- Kerjaya ---------- */
+    .career-banner { border-radius: 26px; padding: 26px 20px; color: #fff; background: radial-gradient(120% 80% at 100% 0%, var(--brand-bright), var(--brand-deep) 65%); box-shadow: var(--shadow); }
+    .career-tag { display: inline-block; font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); background: rgba(205,176,122,.14); padding: 5px 12px; border-radius: 999px; }
+    .career-banner h2 { font-size: 1.55rem; font-weight: 800; margin-top: 12px; }
+    .career-banner p { opacity: .92; font-size: .9rem; margin-top: 10px; }
+    .career-points { list-style: none; padding: 0; margin: 14px 0 0; font-size: .85rem; font-weight: 700; display: grid; gap: 6px; }
+    .career-button { margin-top: 18px; border: 0; border-radius: 14px; background: var(--accent); color: var(--brand-deep); font-weight: 800; padding: 13px 18px; }
+    .career-small { font-size: .78rem !important; opacity: .8; }
+    .career-form { background: var(--paper); border-radius: 26px; box-shadow: var(--shadow); padding: 22px 18px; margin-top: 12px; }
+    .career-form h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 14px; }
+
+    /* ---------- Footer, nav, toast ---------- */
+    .brand-footer { text-align: center; padding: 30px 0 10px; font-size: .78rem; color: var(--muted); }
+    .footer-identity { font-weight: 800; color: var(--ink); font-size: .85rem; }
+    .footer-reg { margin-top: 4px; }
+    .privacy-details { text-align: left; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; margin-top: 16px; }
+    .privacy-details summary { font-weight: 800; color: var(--ink); cursor: pointer; }
+    .privacy-details p { margin-top: 10px; }
+    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding-bottom: env(safe-area-inset-bottom); }
+    .nav-inner { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 0 10px; font-size: .7rem; font-weight: 700; color: var(--muted); text-decoration: none; border: 0; background: none; }
+    .nav-icon { width: 38px; height: 30px; border-radius: 10px; display: grid; place-items: center; }
+    .nav-icon svg { width: 21px; height: 21px; }
+    .nav-item.active { color: var(--brand-deep); }
+    .nav-item.active .nav-icon { background: var(--tint); }
+    .nav-item.action-whatsapp { color: #128c4b; }
+    .nav-item.action-whatsapp .nav-icon { background: #e4f6ec; }
+    .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 12px; font-size: .85rem; opacity: 0; pointer-events: none; transition: .25s; z-index: 30; max-width: calc(100% - 32px); text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 360px) { .products-grid, .check-grid { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <!--
+    KAD DIGITAL JANNAH FINANCIAL (satu fail)
+    Tukar nama, WhatsApp dan pautan media sosial dalam CONFIG di bahagian bawah fail ini.
+    Borang TIDAK disimpan di mana-mana: ia hanya menyediakan mesej WhatsApp untuk pengguna hantar sendiri.
+  -->
+  <a href="#utama" class="skip-link">Langkau ke kandungan</a>
+  <div class="accent-bar">PROTECT · GROW · SECURE</div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://jannahfinancial.netlify.app/"><span class="brand-mark">JWP</span><span class="brand-text"><span class="brand-name">Jannah's Wealth Partners</span><span class="brand-sub">Financial Planning &amp; Solutions</span></span></a>
+    </div>
+  </header>
+
+  <main class="container" id="utama">
+    <section class="profile-card" aria-label="Profil perunding" style="margin-top:18px">
+      <div class="avatar-wrap">
+        <img class="avatar" id="profilePhoto" src="profile.webp" alt="Foto profil Nurul Jannah Mahmud" width="480" height="480" fetchpriority="high">
+        <span class="profile-seal" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+      </div>
+      <div class="micro-label">Rancang · Lindung · Tenang</div>
+      <h1 id="agentName">Nurul Jannah Mahmud</h1>
+      <p class="role" id="agentRole">Perunding Kewangan Holistik</p>
+      <div class="creds">
+        <span class="cred" id="credFimm">FIMM F02024801</span>
+        <span class="cred" id="credTakaful">Ejen AIA PUBLIC Takaful 8431Q</span>
+      </div>
+
+      <div class="hero-actions">
+        <a class="quote-cta" href="#semak">Mulakan Semakan Pelan&nbsp;↗</a>
+        <button class="primary-cta" id="whatsappDirect" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          <span>Hubungi di WhatsApp</span>
+        </button>
+      </div>
+
+      <div id="socialZone">
+        <h2 class="social-title">Media Sosial</h2>
+        <div class="social-links" id="socialLinks"></div>
+      </div>
+
+      <div class="hero-tools">
+        <a class="utility-pill" href="contact.vcf" download="Nurul-Jannah-Mahmud.vcf">＋ Simpan Contact</a>
+        <button type="button" class="utility-pill" id="shareButton">↗ Kongsi Kad</button>
+      </div>
+      <p class="contact-note">Ada soalan tentang takaful, Unit Trust atau PRS? Kita boleh bincang secara terus.</p>
+    </section>
+
+    <div class="intro-quote" id="introText">Setiap keluarga ada keperluan berbeza. Saya bantu anda lindungi apa yang ada, kumpul untuk masa depan dan rancang persaraan, dengan pilihan yang sesuai dengan kemampuan.</div>
+
+    <section id="produk" aria-labelledby="productTitle">
+      <div class="section-heading">
+        <h2 id="productTitle">Apa Yang Anda Ingin Rancang?</h2>
+        <p>Pilih keutamaan anda dan kita semak pilihan yang bersesuaian.</p>
+        <div class="heading-ornament"></div>
+      </div>
+      <p class="group-label">Lindungi · Takaful</p>
+      <div class="products-grid">
+        <button type="button" class="product" data-plan="Medical Card"><div class="product-icon">🏥</div><div><h3>Medical Card</h3><p>Bantu urus kos rawatan hospital mengikut manfaat pelan.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+        <button type="button" class="product" data-plan="Hibah Takaful"><div class="product-icon">🤲</div><div><h3>Hibah Takaful</h3><p>Persediaan kewangan untuk insan tersayang.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+        <button type="button" class="product" data-plan="Plan Sakit Kritikal (CI)"><div class="product-icon">❤️</div><div><h3>Sakit Kritikal (CI)</h3><p>Sokongan kewangan bagi penyakit kritikal yang dilindungi.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+        <button type="button" class="product" data-plan="Pelan Pendidikan Anak"><div class="product-icon">🎓</div><div><h3>Pendidikan Anak</h3><p>Rancang dana pendidikan anak dari awal.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+      </div>
+      <p class="group-label">Kumpul &amp; Bersara · Pelaburan</p>
+      <div class="products-grid">
+        <button type="button" class="product" data-plan="Unit Trust"><div class="product-icon">🌱</div><div><h3>Unit Trust</h3><p>Pelaburan bulanan untuk matlamat jangka panjang.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+        <button type="button" class="product" data-plan="PRS (Persaraan)"><div class="product-icon">🌅</div><div><h3>PRS Persaraan</h3><p>Tabung persaraan tambahan selain KWSP.</p><p class="pick">Pilih &amp; semak ↗</p></div></button>
+      </div>
+    </section>
+
+    <section id="semak" class="form-card" aria-labelledby="quoteTitle">
+      <header class="form-header">
+        <div class="mini-icon">📋</div>
+        <h2 id="quoteTitle">Semak Cadangan Pelan</h2>
+        <p>Tiga langkah mudah untuk saya memahami keperluan anda sebelum kita sambung di WhatsApp.</p>
+      </header>
+      <form id="quoteForm" novalidate>
+        <div class="quote-progress">
+          <div class="quote-progress-meta"><span id="quoteProgressText">Langkah 1 daripada 3</span><span id="quoteProgressLabel">Pilih keperluan</span></div>
+          <div class="quote-progress-bars" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+        </div>
+
+        <div class="quote-step" data-step="1">
+          <h3 class="quote-step-title">01 · Pilih fokus anda</h3>
+          <fieldset>
+            <legend class="field-label">Untuk siapa? <span class="required">*</span></legend>
+            <div class="selector" role="radiogroup">
+              <input type="radio" id="forSelf" name="forWho" value="Diri Sendiri" checked><label for="forSelf">Diri Sendiri</label>
+              <input type="radio" id="forChild" name="forWho" value="Anak"><label for="forChild">Anak</label>
+              <input type="radio" id="forPartner" name="forWho" value="Pasangan"><label for="forPartner">Pasangan</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="field-label">Apa yang anda cari? <span class="required">*</span></legend>
+            <p class="checks-label">Boleh pilih lebih daripada satu.</p>
+            <div class="check-grid" id="plansGrid">
+              <label class="check-item"><input type="checkbox" name="plans" value="Medical Card">Medical Card</label>
+              <label class="check-item"><input type="checkbox" name="plans" value="Hibah Takaful">Hibah Takaful</label>
+              <label class="check-item"><input type="checkbox" name="plans" value="Plan Sakit Kritikal (CI)">Sakit Kritikal (CI)</label>
+              <label class="check-item"><input type="checkbox" name="plans" value="Pelan Pendidikan Anak">Pendidikan Anak</label>
+              <label class="check-item"><input type="checkbox" name="plans" value="Unit Trust">Unit Trust</label>
+              <label class="check-item"><input type="checkbox" name="plans" value="PRS (Persaraan)">PRS Persaraan</label>
+              <label class="check-item wide"><input type="checkbox" name="plans" value="Belum pasti, perlukan cadangan">Belum pasti, perlukan cadangan</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label class="field-label" for="qBudget">Anggaran bajet sebulan (pilihan)</label>
+            <select class="input" id="qBudget"><option value="">Belum pasti</option><option>Bawah RM100</option><option>RM100 – RM200</option><option>RM201 – RM300</option><option>RM301 – RM500</option><option>Lebih RM500</option><option>Perlukan cadangan</option></select>
+          </div>
+          <div class="step-actions"><button class="form-submit" type="button" data-next="2">Seterusnya · Maklumat Diri →</button></div>
+        </div>
+
+        <div class="quote-step" data-step="2" hidden>
+          <h3 class="quote-step-title">02 · Maklumat untuk dihubungi</h3>
+          <div class="field"><label class="field-label" for="qName">Nama <span class="required">*</span></label><input class="input" id="qName" placeholder="Cth: Ahmad" autocomplete="name" maxlength="100" required></div>
+          <div class="field"><label class="field-label" for="qPhone">Nombor WhatsApp <span class="required">*</span></label><input class="input" id="qPhone" type="tel" inputmode="tel" placeholder="Cth: 01112345678" autocomplete="tel" maxlength="20" required></div>
+          <div class="field"><label class="field-label" for="qState">Negeri <span class="required">*</span></label><select class="input state-list" id="qState" required><option value="">Pilih negeri</option></select></div>
+          <div class="step-actions"><button type="button" class="step-back" data-back="1">← Kembali</button><button type="button" class="form-submit" data-next="3">Seterusnya →</button></div>
+        </div>
+
+        <div class="quote-step" data-step="3" hidden>
+          <h3 class="quote-step-title">03 · Butiran untuk semakan awal</h3>
+          <p class="privacy-note">Kongsi maklumat asas sahaja. Jika melibatkan perkara kesihatan yang sensitif, kita bincang terus secara peribadi.</p>
+          <div class="field">
+            <span class="field-label" id="dobLabel">Tarikh Lahir <span class="required">*</span></span>
+            <div class="dob-selects" role="group" aria-labelledby="dobLabel">
+              <select class="input" id="qDay" aria-label="Hari lahir" required><option value="">Hari</option></select>
+              <select class="input" id="qMonth" aria-label="Bulan lahir" required><option value="">Bulan</option></select>
+              <select class="input" id="qYear" aria-label="Tahun lahir" required><option value="">Tahun</option></select>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label class="field-label" for="qGender">Jantina <span class="required">*</span></label><select class="input" id="qGender" required><option value="">Pilih</option><option>Lelaki</option><option>Perempuan</option></select></div>
+            <div class="field"><label class="field-label" for="qSmoking">Merokok / vape? <span class="required">*</span></label><select class="input" id="qSmoking" required><option value="">Pilih</option><option>Tidak</option><option>Merokok</option><option>Vape</option><option>Kedua-duanya</option></select></div>
+          </div>
+          <div class="field"><label class="field-label" for="qJob">Pekerjaan <span class="required">*</span></label><input class="input" id="qJob" placeholder="Cth: Eksekutif" maxlength="100" required></div>
+          <div class="field"><label class="field-label" for="qHealth">Status kesihatan (pilihan)</label><select class="input" id="qHealth"><option value="">Bincang melalui WhatsApp</option><option>Sihat / Tiada penyakit</option><option>Ada masalah kesihatan</option><option>Dalam rawatan / ambil ubat</option></select></div>
+          <div class="field"><label class="field-label" for="qQuestion">Soalan tambahan (pilihan)</label><textarea class="input" id="qQuestion" maxlength="1000" placeholder="Apa yang anda nak tahu?"></textarea></div>
+          <label class="privacy-consent"><input type="checkbox" id="quoteConsent" required><span>Saya faham maklumat ini hanya disediakan sebagai mesej WhatsApp untuk <strong>saya semak dan hantar sendiri</strong>. Tiada borang disimpan oleh laman ini. <a href="#privasi">Maklumat privasi</a>.</span></label>
+          <div class="step-actions"><button type="button" class="step-back" data-back="2">← Kembali</button><button type="submit" class="form-submit">Teruskan ke WhatsApp ↗</button></div>
+          <p class="disclaimer">Pertanyaan percuma, tiada komitmen. Anda memilih sendiri untuk menghantar WhatsApp.</p>
+        </div>
+        <p class="quote-help">Nak tanya dahulu tanpa isi borang? <button type="button" id="quoteQuickWhatsapp">WhatsApp terus</button></p>
+      </form>
+    </section>
+
+    <section id="kerjaya" aria-labelledby="careerTitle">
+      <div class="career-banner">
+        <div class="career-tag">Bina Langkah Seterusnya</div>
+        <h2 id="careerTitle">Kenali Peluang,<br>Bina Kerjaya</h2>
+        <p>Terfikir untuk menjadi perunding kewangan? Kita boleh berbincang tentang skop tugas, latihan dan langkah untuk bermula, secara part-time atau full-time.</p>
+        <ul class="career-points"><li>✓ Pilihan part-time / full-time</li><li>✓ Latihan &amp; bimbingan disediakan</li><li>✓ Bina kemahiran dan rangkaian pelanggan</li></ul>
+        <button class="career-button" id="careerCTA" type="button" aria-expanded="false" aria-controls="careerFormBlock">Kenali Peluang Kerjaya ↓</button>
+        <p class="career-small">Belum ada pengalaman? Kita boleh mula dengan sesi penerangan.</p>
+      </div>
+      <div class="career-form" id="careerFormBlock" hidden>
+        <h3>Berkenalan &amp; Tanya Tentang Kerjaya</h3>
+        <form id="careerForm" novalidate>
+          <div class="field"><label class="field-label" for="cName">Nama <span class="required">*</span></label><input class="input" id="cName" placeholder="Cth: Ahmad" autocomplete="name" maxlength="100" required></div>
+          <div class="field"><label class="field-label" for="cPhone">Nombor WhatsApp <span class="required">*</span></label><input class="input" id="cPhone" type="tel" inputmode="tel" placeholder="Cth: 01112345678" autocomplete="tel" required></div>
+          <div class="two-col">
+            <div class="field"><label class="field-label" for="cAge">Umur <span class="required">*</span></label><input class="input" id="cAge" type="number" min="18" max="100" placeholder="Cth: 28" required></div>
+            <div class="field"><label class="field-label" for="cMode">Minat buat? <span class="required">*</span></label><select class="input" id="cMode" required><option value="">Pilih</option><option>Part-time</option><option>Full-time</option><option>Belum pasti</option></select></div>
+          </div>
+          <div class="field"><label class="field-label" for="cState">Negeri <span class="required">*</span></label><select class="input state-list" id="cState" required><option value="">Pilih negeri</option></select></div>
+          <div class="field"><label class="field-label" for="cJob">Pekerjaan sekarang <span class="required">*</span></label><input class="input" id="cJob" placeholder="Cth: Eksekutif Pemasaran" maxlength="100" required></div>
+          <div class="field"><label class="field-label" for="cExperience">Pernah jadi ejen / perunding? <span class="required">*</span></label><select class="input" id="cExperience" required><option value="">Sila pilih</option><option>Ya, masih aktif</option><option>Ya, pernah sebelum ini</option><option>Belum pernah</option></select></div>
+          <div class="field"><label class="field-label" for="cQuestion">Ada perkara nak ditanya? (pilihan)</label><textarea class="input" id="cQuestion" maxlength="1000" placeholder="Apa yang anda nak tahu tentang kerjaya ini?"></textarea></div>
+          <label class="privacy-consent"><input id="careerConsent" type="checkbox" required><span>Saya faham maklumat ini hanya disediakan sebagai mesej WhatsApp untuk saya semak dan hantar sendiri; tiada borang disimpan oleh laman ini.</span></label>
+          <button type="submit" class="form-submit" style="width:100%">Sambung Pertanyaan di WhatsApp ↗</button>
+          <p class="disclaimer">Pertanyaan awal sahaja, tidak bermaksud anda telah mendaftar.</p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="brand-footer">
+      <p class="footer-identity"><span id="footerYear">© 2026</span> · Jannah's Wealth Partners</p>
+      <p class="footer-reg">FIMM F02024801 · Ejen AIA PUBLIC Takaful 8431Q</p>
+      <p class="footer-reg"><a href="https://jannahfinancial.netlify.app/" style="color:var(--brand-deep);font-weight:700">Lawati laman penuh ↗</a></p>
+      <details class="privacy-details" id="privasi">
+        <summary>Privasi &amp; Maklumat Penting</summary>
+        <p>Halaman ini ialah profil perunding, bukan portal rasmi mana-mana syarikat. Maklumat adalah umum dan bukan tawaran, cadangan atau nasihat pelaburan atau takaful.</p>
+        <p><strong>Pelaburan:</strong> Unit Trust dan PRS ditawarkan melalui Manulife Investment Management (M) Berhad. Baca Prospektus / Dokumen Penzahiran serta Lembaran Penonjolan Produk sebelum melabur. Pelaburan melibatkan risiko termasuk kehilangan modal, harga unit boleh naik atau turun, dan prestasi lalu tidak menjamin prestasi masa hadapan.</p>
+        <p><strong>Takaful:</strong> Produk takaful ditawarkan oleh AIA PUBLIC Takaful Bhd. dan tertakluk kepada terma, syarat dan pengecualian dalam sijil takaful.</p>
+        <p>Maklumat borang hanya disediakan sebagai draf WhatsApp pada peranti anda dan tidak disimpan ke pangkalan data. Elakkan berkongsi maklumat perubatan sensitif melalui borang ini.</p>
+      </details>
+    </footer>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Menu navigasi">
+    <div class="nav-inner">
+      <a class="nav-item active" href="#utama" data-nav="utama"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span>Utama</a>
+      <a class="nav-item" href="#produk" data-nav="produk"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>Pelan</a>
+      <a class="nav-item" href="#semak" data-nav="semak"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></svg></span>Semak</a>
+      <button type="button" class="nav-item action-whatsapp" id="navWhatsapp"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></span>WhatsApp</button>
+    </div>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    'use strict';
+    /* ============================================================
+       CONFIG: tukar maklumat anda di sini sahaja.
+       whatsapp: kod negara 60, tanpa "+" atau sengkang.
+       social: isi pautan penuh; biarkan kosong ('') untuk sembunyikan.
+       Jika tukar nama/nombor, kemas kini juga fail contact.vcf.
+       ============================================================ */
+    const CONFIG = {
+      name: 'Nurul Jannah Mahmud',
+      whatsapp: '60123947764',
+      greeting: 'Assalamualaikum Nurul Jannah,',
+      social: {
+        instagram: '',
+        facebook: '',
+        tiktok: '',
+        threads: ''
+      }
+    };
+
+    const $ = id => document.getElementById(id);
+    const STATES = ['Johor','Kedah','Kelantan','Melaka','Negeri Sembilan','Pahang','Perak','Perlis','Pulau Pinang','Sabah','Sarawak','Selangor','Terengganu','WP Kuala Lumpur','WP Putrajaya','WP Labuan'];
+    const MONTHS = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
+    const SOCIAL_ICONS = {
+      instagram: ['Instagram', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>'],
+      facebook: ['Facebook', '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>'],
+      tiktok: ['TikTok', '<path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 3c.5 2.6 2.2 4.2 5 4.5"/>'],
+      threads: ['Threads', '<path d="M16.5 11c-.5-3-2.4-4-4.5-4-3 0-5 2.3-5 5.5S8.8 18 12 18c3.4 0 5-2 5-4.3 0-2.6-2.4-3.4-4.6-3.2-2.1.2-3 1.4-2.9 2.6.1 1.3 1.4 2 2.8 1.9 2-.2 2.9-2 2.6-5"/>']
+    };
+
+    let toastTimer;
+    function toast(msg) {
+      const t = $('toast'); t.textContent = msg; t.classList.add('show');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+    }
+    const digits = s => String(s || '').replace(/\D/g, '');
+    const validMY = s => /^(?:60|0)?1\d{8,9}$/.test(digits(s));
+    function openWhatsApp(text) {
+      const url = 'https://wa.me/' + digits(CONFIG.whatsapp) + '?text=' + encodeURIComponent(text);
+      const w = window.open(url, '_blank', 'noopener');
+      if (!w) location.href = url;
+    }
+    const quickMsg = () => CONFIG.greeting + '\nSaya dapat kad digital anda dan ingin bertanya tentang perancangan kewangan.';
+
+    // Media sosial: papar hanya yang ada pautan
+    (function renderSocial() {
+      const wrap = $('socialLinks');
+      const entries = Object.entries(CONFIG.social).filter(([, url]) => url);
+      if (!entries.length) { $('socialZone').hidden = true; return; }
+      entries.forEach(([key, url]) => {
+        const [label, path] = SOCIAL_ICONS[key] || [key, ''];
+        const a = document.createElement('a');
+        a.className = 'social-link'; a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + path + '</svg><span>' + label + '</span>';
+        wrap.appendChild(a);
+      });
+    })();
+
+    $('footerYear').textContent = '© ' + new Date().getFullYear();
+    document.querySelectorAll('.state-list').forEach(sel => STATES.forEach(s => sel.add(new Option(s, s))));
+    for (let d = 1; d <= 31; d++) $('qDay').add(new Option(d, d));
+    MONTHS.forEach((m, i) => $('qMonth').add(new Option(m, i + 1)));
+    const thisYear = new Date().getFullYear();
+    for (let y = thisYear; y >= thisYear - 80; y--) $('qYear').add(new Option(y, y));
+
+    ['whatsappDirect', 'navWhatsapp', 'quoteQuickWhatsapp'].forEach(id => $(id).addEventListener('click', () => openWhatsApp(quickMsg())));
+
+    // Kongsi kad
+    $('shareButton').addEventListener('click', async () => {
+      const data = { title: document.title, text: 'Kad digital ' + CONFIG.name, url: location.href.split('#')[0] };
+      if (navigator.share) { try { await navigator.share(data); } catch (e) {} return; }
+      try { await navigator.clipboard.writeText(data.url); toast('Pautan kad telah disalin.'); }
+      catch (e) { toast(data.url); }
+    });
+
+    // Kad produk: tanda pelan dalam borang dan lompat ke borang
+    document.querySelectorAll('.product').forEach(btn => btn.addEventListener('click', () => {
+      const box = document.querySelector('#plansGrid input[value="' + btn.dataset.plan + '"]');
+      if (box) box.checked = true;
+      showStep(1);
+      $('semak').scrollIntoView({ behavior: 'smooth' });
+      toast(btn.dataset.plan + ' dipilih.');
+    }));
+
+    // Borang 3 langkah
+    const LABELS = { 1: 'Pilih keperluan', 2: 'Maklumat diri', 3: 'Butiran semakan' };
+    function showStep(n) {
+      document.querySelectorAll('.quote-step').forEach(s => s.hidden = Number(s.dataset.step) !== n);
+      $('quoteProgressText').textContent = 'Langkah ' + n + ' daripada 3';
+      $('quoteProgressLabel').textContent = LABELS[n];
+      document.querySelectorAll('.quote-progress-bars span').forEach((b, i) => b.classList.toggle('is-active', i < n));
+    }
+    function checkFields(container) {
+      let firstBad = null;
+      container.querySelectorAll('[required]').forEach(el => {
+        let ok = el.type === 'checkbox' ? el.checked : el.value.trim() !== '';
+        if (ok && el.type === 'tel') ok = validMY(el.value);
+        if (ok && el.type === 'number') ok = el.checkValidity();
+        el.classList.toggle('invalid', !ok);
+        if (!ok && !firstBad) firstBad = el;
+      });
+      if (firstBad) {
+        firstBad.focus();
+        toast(firstBad.type === 'tel' ? 'Sila masukkan nombor telefon Malaysia yang sah.' : firstBad.type === 'checkbox' ? 'Sila tandakan persetujuan.' : 'Sila lengkapkan maklumat bertanda *.');
+        return false;
+      }
+      return true;
+    }
+    function validateStep(n) {
+      const step = document.querySelector('.quote-step[data-step="' + n + '"]');
+      if (n === 1 && !document.querySelector('#plansGrid input:checked')) { toast('Sila pilih sekurang-kurangnya satu.'); return false; }
+      return checkFields(step);
+    }
+    document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+      const cur = Number(b.dataset.next) - 1;
+      if (validateStep(cur)) { showStep(cur + 1); $('semak').scrollIntoView({ behavior: 'smooth' }); }
+    }));
+    document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => showStep(Number(b.dataset.back))));
+
+    const v = id => $(id).value.trim();
+    const sel = id => $(id).options[$(id).selectedIndex].text;
+    $('quoteForm').addEventListener('submit', e => {
+      e.preventDefault();
+      if (!validateStep(3)) return;
+      const plans = [...document.querySelectorAll('#plansGrid input:checked')].map(i => i.value).join(', ');
+      const lines = [
+        CONFIG.greeting,
+        'Saya ingin semakan cadangan pelan melalui kad digital anda.',
+        '',
+        '• Untuk: ' + document.querySelector('input[name="forWho"]:checked').value,
+        '• Pelan: ' + plans,
+        '• Bajet sebulan: ' + (v('qBudget') || 'Belum pasti'),
+        '• Nama: ' + v('qName'),
+        '• No. WhatsApp: ' + v('qPhone'),
+        '• Negeri: ' + v('qState'),
+        '• Tarikh lahir: ' + v('qDay') + ' ' + sel('qMonth') + ' ' + v('qYear'),
+        '• Jantina: ' + v('qGender'),
+        '• Merokok/vape: ' + v('qSmoking'),
+        '• Pekerjaan: ' + v('qJob'),
+        '• Kesihatan: ' + (v('qHealth') || 'Bincang di WhatsApp')
+      ];
+      if (v('qQuestion')) lines.push('', 'Soalan: ' + v('qQuestion'));
+      openWhatsApp(lines.join('\n'));
+    });
+
+    // Kerjaya
+    $('careerCTA').addEventListener('click', () => {
+      const block = $('careerFormBlock');
+      block.hidden = !block.hidden;
+      $('careerCTA').setAttribute('aria-expanded', String(!block.hidden));
+      if (!block.hidden) block.scrollIntoView({ behavior: 'smooth' });
+    });
+    $('careerForm').addEventListener('submit', e => {
+      e.preventDefault();
+      if (!checkFields($('careerForm'))) return;
+      const lines = [
+        CONFIG.greeting,
+        'Saya berminat untuk tahu tentang peluang kerjaya.',
+        '',
+        '• Nama: ' + v('cName'),
+        '• No. WhatsApp: ' + v('cPhone'),
+        '• Umur: ' + v('cAge'),
+        '• Negeri: ' + v('cState'),
+        '• Pekerjaan: ' + v('cJob'),
+        '• Minat: ' + v('cMode'),
+        '• Pengalaman: ' + v('cExperience')
+      ];
+      if (v('cQuestion')) lines.push('', 'Soalan: ' + v('cQuestion'));
+      openWhatsApp(lines.join('\n'));
+    });
+
+    // Tanda menu bawah ikut bahagian yang sedang dilihat
+    const navItems = document.querySelectorAll('.nav-item[data-nav]');
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      navItems.forEach(n => n.classList.toggle('active', n.dataset.nav === en.target.dataset.section));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    [['utama', document.querySelector('.profile-card')], ['produk', $('produk')], ['semak', $('semak')]].forEach(([key, el]) => {
+      el.dataset.section = key; io.observe(el);
+    });
+  </script>
+</body>
+</html>
