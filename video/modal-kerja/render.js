@@ -38,8 +38,11 @@ const previewIdx = args.indexOf("--preview");
   const vo = ["voiceover.m4a", "voiceover.mp3", "voiceover.wav"].map(f => path.join(dir, f)).find(fs.existsSync);
   const audioIn = ["-i", music, ...(vo ? ["-i", vo] : [])];
   const filter = vo
-    ? "[2:a]aresample=44100,aformat=channel_layouts=stereo,apad,asplit=2[vo1][vo2];" +
-      "[1:a][vo1]sidechaincompress=threshold=0.02:ratio=10:attack=15:release=350[duck];" +
+    // Suara: buang dengung rendah & bunyi latar, ratakan kekuatan suara
+    ? "[2:a]aresample=44100,aformat=channel_layouts=stereo,highpass=f=90,afftdn=nr=14:nf=-38," +
+      "acompressor=threshold=-22dB:ratio=3:attack=8:release=200:makeup=3,apad,asplit=2[vo1][vo2];" +
+      // Muzik diperlahankan bila suara bercakap
+      "[1:a]volume=0.55[m];[m][vo1]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=400[duck];" +
       "[duck][vo2]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a]"
     : "[1:a]loudnorm=I=-14:TP=-1.5:LRA=11[a]";
   if (vo) console.log("Guna suara latar:", path.basename(vo));

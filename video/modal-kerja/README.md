@@ -1,15 +1,18 @@
 # Video iklan: Modal Kerja PKS (Fintech Advisory)
 
-Video pendek 9:16 (1080x1920, 36 saat) untuk Reels, TikTok, Shorts dan WhatsApp Status.
+Video pendek 9:16 (1080x1920, 35 saat, latar biru) untuk Reels, TikTok, Shorts dan WhatsApp Status.
 
 | Fail | Kegunaan |
 |---|---|
-| `modal-kerja-pks.mp4` | Video siap, dengan muzik latar dan kesan bunyi |
+| `modal-kerja-pks.mp4` | Video siap, dengan suara, muzik latar dan kesan bunyi |
+| `voiceover.m4a` | Rakaman suara. Masa babak dalam `scene.html` diselaraskan dengan rakaman ini |
 | `scene.html` | Semua teks dan animasi. Buka dalam pelayar untuk pratonton |
 | `music.py` | Jana muzik latar dan kesan bunyi daripada kod (bebas hak cipta) |
 | `render.js` | Tukar `scene.html` dan audio kepada MP4 |
 
-## Tambah suara anda sendiri (disyorkan)
+## Suara latar
+
+Jika anda rakam semula suara, masa setiap babak (`data-scene` dan `data-in` dalam `scene.html`) perlu diselaraskan semula.
 
 1. Rakam skrip di bawah guna telefon, di tempat yang senyap. Mula bercakap pada saat 0.
 2. Simpan sebagai `voiceover.m4a` (atau `.mp3` / `.wav`) dalam folder ini.
