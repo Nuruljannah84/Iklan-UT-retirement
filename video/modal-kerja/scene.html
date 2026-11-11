@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Iklan Modal Kerja PKS</title>
+<meta name="viewport" content="width=1080">
+<style>
+  :root {
+    --green-900: #0b2f28;
+    --green-800: #0f3d34;
+    --green-700: #17594b;
+    --green-500: #23806b;
+    --gold: #e0ad4a;
+    --gold-soft: #f6ebd3;
+    --cream: #fbfaf6;
+    --ink: #1b2522;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--green-900); }
+  body {
+    font-family: "Inter Display", "Inter", system-ui, sans-serif;
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+  #stage {
+    position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 0%, var(--green-700) 0%, var(--green-800) 45%, var(--green-900) 100%);
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .35; }
+  #b1 { width: 620px; height: 620px; background: var(--gold); left: -260px; top: 180px; opacity: .18; }
+  #b2 { width: 760px; height: 760px; background: var(--green-500); right: -300px; bottom: 120px; opacity: .45; }
+  .grid {
+    position: absolute; inset: 0; opacity: .07;
+    background-image: linear-gradient(var(--cream) 1px, transparent 1px), linear-gradient(90deg, var(--cream) 1px, transparent 1px);
+    background-size: 90px 90px;
+    mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  }
+  #progress { position: absolute; left: 0; top: 0; height: 10px; background: var(--gold); width: 0; }
+  #brand {
+    position: absolute; top: 130px; left: 0; right: 0; text-align: center;
+    font-size: 30px; font-weight: 700; letter-spacing: .28em; color: var(--gold); text-transform: uppercase;
+  }
+
+  /* Safe zone untuk Reels/TikTok: kandungan utama antara y≈260 dan y≈1560 */
+  .scene { position: absolute; left: 90px; right: 90px; top: 300px; bottom: 380px;
+           display: flex; flex-direction: column; justify-content: center; }
+  [data-in] { opacity: 0; will-change: transform, opacity; }
+
+  .kicker { font-size: 40px; font-weight: 700; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; margin-bottom: 34px; }
+  .h1 { font-size: 112px; line-height: 1.04; font-weight: 900; letter-spacing: -.02em; }
+  .h2 { font-size: 84px; line-height: 1.08; font-weight: 900; letter-spacing: -.015em; }
+  .body { font-size: 46px; line-height: 1.35; font-weight: 500; color: #d9e6e1; }
+  .gold { color: var(--gold); }
+  .hl { position: relative; display: inline-block; color: var(--ink); z-index: 0; padding: 0 14px; }
+  .hl::before { content: ""; position: absolute; inset: 8px 0 4px 0; background: var(--gold); z-index: -1;
+                border-radius: 12px; transform-origin: left; transform: scaleX(var(--p, 0)); }
+
+  .card {
+    display: flex; align-items: center; gap: 36px;
+    background: rgba(251, 250, 246, .08); border: 2px solid rgba(224, 173, 74, .35);
+    border-radius: 32px; padding: 38px 40px; margin-top: 30px;
+  }
+  .icon { flex: 0 0 120px; height: 120px; border-radius: 28px; background: var(--gold);
+          display: grid; place-items: center; }
+  .icon svg { width: 68px; height: 68px; stroke: var(--green-900); fill: none; stroke-width: 2.2;
+              stroke-linecap: round; stroke-linejoin: round; }
+  .card p { font-size: 46px; line-height: 1.22; font-weight: 700; }
+  .card p small { display: block; font-size: 34px; font-weight: 500; color: #c4d6d0; margin-top: 6px; }
+
+  .pill { display: inline-block; align-self: flex-start; background: var(--gold); color: var(--green-900);
+          font-weight: 800; font-size: 38px; padding: 16px 30px; border-radius: 999px; letter-spacing: .04em; }
+
+  .big { font-size: 400px; line-height: .9; font-weight: 900; color: var(--gold); letter-spacing: -.04em; text-align: center; }
+  .center { text-align: center; }
+
+  .check { display: flex; align-items: center; gap: 30px; font-size: 64px; font-weight: 800; margin-top: 34px; }
+  .tick { flex: 0 0 96px; height: 96px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; }
+  .tick svg { width: 56px; height: 56px; stroke: var(--green-900); stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .free { font-size: 150px; line-height: 1; font-weight: 900; letter-spacing: -.03em; }
+
+  .avatar { width: 300px; height: 300px; border-radius: 50%; border: 10px solid var(--gold);
+            object-fit: cover; align-self: center; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+  .name { font-size: 64px; font-weight: 900; text-align: center; margin-top: 34px; }
+  .role { font-size: 38px; font-weight: 600; text-align: center; color: var(--gold); margin-top: 8px; letter-spacing: .04em; }
+  .wa {
+    display: flex; align-items: center; justify-content: center; gap: 26px; margin-top: 56px;
+    background: #25d366; color: #fff; border-radius: 999px; padding: 34px 40px;
+    font-size: 66px; font-weight: 900; letter-spacing: .01em; box-shadow: 0 18px 50px rgba(37, 211, 102, .35);
+  }
+  .wa svg { width: 78px; height: 78px; fill: #fff; }
+  .note { font-size: 28px; line-height: 1.4; color: #a9bfb8; text-align: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="b1"></div>
+  <div class="blob" id="b2"></div>
+  <div class="grid"></div>
+  <div id="progress"></div>
+  <div id="brand">Jannah Financial</div>
+
+  <!-- 1. HOOK (0 – 4s) -->
+  <section class="scene" data-scene="0 4">
+    <div class="kicker" data-in="0.2">Pemilik bisnes PKS,</div>
+    <div class="h1" data-in="0.6">Bisnes nak berkembang…</div>
+    <div class="h1" data-in="1.4" style="margin-top:40px">tapi <span class="hl" data-hl="2.0">cash flow</span><br>tersekat?</div>
+  </section>
+
+  <!-- 2. MASALAH (4 – 9.5s) -->
+  <section class="scene" data-scene="4 9.5">
+    <div class="h2" data-in="4.1" style="margin-bottom:20px">Pernah alami <span class="gold">situasi ini?</span></div>
+    <div class="card" data-in="4.8" data-anim="left">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div>
+      <p>Nak tambah stok<small>tapi modal tak cukup</small></p>
+    </div>
+    <div class="card" data-in="5.7" data-anim="left">
+      <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.6"/><path d="M6 6V4h12v2"/></svg></div>
+      <p>Gaji &amp; supplier<small>perlu dibayar ikut masa</small></p>
+    </div>
+    <div class="card" data-in="6.6" data-anim="left">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="m4 15 5-5 4 4 7-7"/><path d="M15 7h5v5"/></svg></div>
+      <p>Projek besar masuk<small>tapi cash belum sedia</small></p>
+    </div>
+  </section>
+
+  <!-- 3. PENYELESAIAN (9.5 – 14s) -->
+  <section class="scene" data-scene="9.5 14">
+    <div class="pill" data-in="9.6" data-anim="pop">PENYELESAIANNYA</div>
+    <div class="h1" data-in="10.1" style="margin-top:44px">Pembiayaan<br><span class="gold">Modal Kerja</span></div>
+    <div class="h2" data-in="10.8" style="margin-top:20px">untuk PKS di Malaysia</div>
+    <div class="body" data-in="11.6" style="margin-top:44px">Untuk stok, gaji, bayaran supplier dan kembangkan bisnes anda.</div>
+  </section>
+
+  <!-- 4. 30 BANK PANEL (14 – 19.5s) -->
+  <section class="scene" data-scene="14 19.5">
+    <div class="kicker center" data-in="14.1">Kami berpanel dengan</div>
+    <div class="big" data-in="14.4" data-anim="pop" data-count="30" data-count-dur="1.4">0</div>
+    <div class="h2 center" data-in="15.2">bank tempatan<br><span class="gold">seluruh Malaysia</span></div>
+    <div class="body center" data-in="16.2" style="margin-top:44px">Kami bantu padankan bisnes anda dengan bank yang sesuai. Tak perlu ke bank satu&nbsp;per&nbsp;satu.</div>
+  </section>
+
+  <!-- 5. PERCUMA (19.5 – 24.5s) -->
+  <section class="scene" data-scene="19.5 24.5">
+    <div class="free" data-in="19.6" data-anim="pop"><span class="hl" data-hl="20.2">PERCUMA</span></div>
+    <div class="check" data-in="20.8" data-anim="left" style="margin-top:70px">
+      <span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>Konsultasi
+    </div>
+    <div class="check" data-in="21.5" data-anim="left">
+      <span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>Semakan kelayakan
+    </div>
+    <div class="body" data-in="22.3" style="margin-top:60px">Semak dulu peluang bisnes anda, kemudian baru buat keputusan.</div>
+  </section>
+
+  <!-- 6. CTA (24.5 – 31s) -->
+  <section class="scene" data-scene="24.5 31" style="top:260px; bottom:330px">
+    <img class="avatar" src="../../images/nurul-jannah-square.webp" alt="" data-in="24.6" data-anim="pop">
+    <div class="name" data-in="25.1">Nurul Jannah Mahmud</div>
+    <div class="role" data-in="25.4">JANNAH FINANCIAL</div>
+    <div class="h2 center" data-in="26" style="margin-top:50px; font-size:64px">Semak kelayakan bisnes anda <span class="gold">hari ini.</span></div>
+    <div class="wa" data-in="26.7" data-anim="pop" data-pulse="27.5">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3z"/></svg>
+      012-394 7764
+    </div>
+    <div class="note" data-in="27.4">*Kelulusan pembiayaan tertakluk kepada penilaian, terma &amp; syarat setiap bank.</div>
+  </section>
+</div>
+
+<script>
+  const DURATION = 31;
+  const clamp = x => Math.max(0, Math.min(1, x));
+  const easeOut = x => 1 - Math.pow(1 - x, 3);
+  const backOut = x => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+
+  const scenes = [...document.querySelectorAll("[data-scene]")].map(el => {
+    const [start, end] = el.dataset.scene.split(" ").map(Number);
+    return { el, start, end, items: [...el.querySelectorAll("[data-in]")] };
+  });
+
+  function render(t) {
+    document.getElementById("progress").style.width = (clamp(t / DURATION) * 100) + "%";
+    document.getElementById("b1").style.transform = `translate(${Math.sin(t * .35) * 80}px, ${Math.cos(t * .25) * 120}px)`;
+    document.getElementById("b2").style.transform = `translate(${Math.cos(t * .3) * 90}px, ${Math.sin(t * .2) * 100}px)`;
+
+    for (const s of scenes) {
+      const visible = t >= s.start - 0.05 && t <= s.end + 0.05;
+      s.el.style.display = visible ? "flex" : "none";
+      if (!visible) continue;
+      const isLast = s === scenes[scenes.length - 1];
+      const outP = isLast ? 0 : easeOut(clamp((t - (s.end - 0.45)) / 0.45));  // keluar bersama
+      for (const el of s.items) {
+        const inP = clamp((t - Number(el.dataset.in)) / 0.6);
+        const a = easeOut(inP);
+        const anim = el.dataset.anim || "up";
+        let tf = "";
+        if (anim === "up")   tf = `translateY(${(1 - a) * 70 - outP * 60}px)`;
+        if (anim === "left") tf = `translateX(${(1 - a) * -120 + outP * 80}px)`;
+        if (anim === "pop")  tf = `scale(${(0.55 + 0.45 * backOut(inP)) * (1 - outP * 0.15)})`;
+        if (el.dataset.pulse && t > Number(el.dataset.pulse)) {
+          tf += ` scale(${1 + 0.045 * Math.max(0, Math.sin((t - Number(el.dataset.pulse)) * Math.PI * 1.6))})`;
+        }
+        el.style.opacity = Math.min(a * 1.4, 1) * (1 - outP);
+        el.style.transform = tf;
+        if (el.dataset.count) {
+          const p = easeOut(clamp((t - Number(el.dataset.in)) / Number(el.dataset.countDur || 1)));
+          el.textContent = Math.round(Number(el.dataset.count) * p);
+        }
+      }
+      s.el.querySelectorAll("[data-hl]").forEach(h => {
+        h.style.setProperty("--p", easeOut(clamp((t - Number(h.dataset.hl)) / 0.5)));
+      });
+    }
+  }
+  window.render = render;
+  window.DURATION = DURATION;
+
+  // Pratonton dalam pelayar (tanpa ?render): main gelung animasi
+  if (!location.search.includes("render")) {
+    const t0 = performance.now();
+    const loop = now => { render(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  } else {
+    render(0);
+  }
+</script>
+</body>
+</html>
