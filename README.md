@@ -11,6 +11,8 @@ Laman langsung: https://jannahfinancial.netlify.app/
 | `index.html` | Laman utama: tiga tiang kewangan, semakan kesihatan kewangan, profil, borang hubungi |
 | `perlindungan.html` | Takaful perubatan, penyakit kritikal, hayat/hibah dan kalkulator keperluan perlindungan |
 | `persaraan.html` | Unit Trust, PRS dan kalkulator persaraan |
+| `kad/index.html` | Kad digital satu halaman (mobile): profil, WhatsApp, simpan contact, kongsi, borang semakan 3 langkah, kerjaya. Pautan: `/kad/` |
+| `kad/contact.vcf` | Fail contact untuk butang "Simpan Contact" (kemas kini jika nama/nombor bertukar) |
 | `kerjaya.html` | Pengambilan (recruitment): kenapa sertai, langkah menyertai, borang daftar minat |
 | `style.css` | Reka bentuk dan warna |
 | `script.js` | Tetapan, kalkulator dan pautan WhatsApp |
