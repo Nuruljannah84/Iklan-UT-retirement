@@ -20,13 +20,13 @@ Jika anda rakam semula suara, masa setiap babak (`data-scene` dan `data-in` dala
 
 | Masa | Skrip suara |
 |---|---|
-| 0 – 4s | "Pemilik bisnes PKS. Bisnes nak berkembang, tapi *cash flow* tersekat?" |
-| 4 – 9.5s | "Nak tambah stok, gaji dan supplier perlu dibayar, projek besar pula masuk…" |
-| 9.5 – 14s | "Penyelesaiannya: pembiayaan modal kerja untuk PKS." |
-| 14 – 19s | "Ada pilihan pembiayaan Islamik, dan skim jaminan pembiayaan seperti CGC." |
-| 19 – 24.5s | "Kami berpanel dengan 30 bank, dan bantu padankan bisnes anda dengan bank yang sesuai." |
-| 24.5 – 29.5s | "Konsultasi dan semakan kelayakan, percuma." |
-| 29.5 – 36s | "WhatsApp saya, Nurul Jannah dari Fintech Advisory, di 012-394 7764. Semak kelayakan bisnes anda hari ini." |
+| 0 – 5.4s | "Pemilik bisnes PKS. Bisnes nak berkembang, tapi *cash flow* tersekat?" |
+| 5.4 – 9.1s | "Nak tambah stok, gaji dan supplier perlu dibayar, projek besar pula masuk…" |
+| 9.1 – 12.4s | "Penyelesaiannya: pembiayaan modal kerja untuk PKS." |
+| 12.4 – 17.4s | "Ada pilihan pembiayaan Islamik, dan skim jaminan pembiayaan seperti CGC." |
+| 17.4 – 22.85s | "Kami berpanel dengan 30 bank, dan bantu padankan bisnes anda dengan bank yang sesuai." |
+| 22.85 – 26.3s | "Konsultasi dan semakan kelayakan, percuma." |
+| 26.3 – 35s | "WhatsApp saya, Nurul Jannah dari Fintech Advisory, di 012-394 7764. Semak kelayakan bisnes anda hari ini." |
 
 ## Tukar teks dan render semula
 
