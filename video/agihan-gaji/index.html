@@ -156,7 +156,7 @@
 </div>
 
 <script>
-const W = 1080, H = 1920, DURATION = 66;
+const W = 1080, H = 1920;
 const RM = n => "RM" + Math.round(n).toLocaleString("en-MY");
 const SALARY = 4000;
 
@@ -189,11 +189,14 @@ const B = [
     bul: ["Makan luar, hobi, percutian", "Buku, kursus &amp; self-growth", "Self-care &amp; hadiah untuk diri"],
     note: "Belanja tanpa rasa bersalah, sebab yang lain dah settle." },
 ];
-// Masa (saat) setiap bahagian dalam donut
-const T0 = 12.5, LENS = [6.5, 5.5, 5.5, 5.5, 5.5, 5.5];
+// Panjang setiap babak (saat). window.TIMING (dari voice/timing.json) boleh panjangkan babak ikut audio.
+const DEF = { hook: 5, prob: 4.5, formula: 3, b: [6.5, 5.5, 5.5, 5.5, 5.5, 5.5], sum: 5, tip: 4.2, real: 4, cta: 6.3 };
+const L = Object.assign({}, DEF, window.TIMING || {});
+const T_PROB = L.hook, T_FORM = T_PROB + L.prob, T0 = T_FORM + L.formula, LENS = L.b;
 const STARTS = LENS.map((_, i) => T0 + LENS.slice(0, i).reduce((a, b) => a + b, 0));
-const T_SUM = STARTS[5] + LENS[5];           // 46.5 ringkasan
-const T_TIP = T_SUM + 5, T_REAL = T_TIP + 4.2, T_CTA = T_REAL + 4;
+const T_SUM = STARTS[5] + LENS[5];
+const T_TIP = T_SUM + L.sum, T_REAL = T_TIP + L.tip, T_CTA = T_REAL + L.real;
+const DURATION = T_CTA + L.cta;
 
 /* ---------- Bina elemen ---------- */
 const R = 205, SW = 92, C = 2 * Math.PI * R, GAP = 4;
@@ -265,38 +268,40 @@ function render(t) {
   show("brand", t, .1, T_CTA + .3, { dy: 0 });
 
   // Babak 1: hook (0 – 5s)
-  show("s1a", t, .2, 5);
-  show("counter", t, .5, 5, { sc: .15, dy: 0 });
+  const E1 = T_PROB;
+  show("s1a", t, .2, E1);
+  show("counter", t, .5, E1, { sc: .15, dy: 0 });
   let spent = 0;
   CHIPS.forEach((c, i) => {
     const a = 1.1 + i * .45;
-    show("ch" + i, t, a, 5, { base: "translateX(-50%)", dy: -30, fi: .35 });
+    show("ch" + i, t, a, E1, { base: "translateX(-50%)", dy: -30, fi: .35 });
     spent += c[1] * ease((t - a) / .4);
   });
   const left = SALARY - spent;
   $("counter").textContent = RM(left);
   const k = clamp(spent / SALARY);
   $("counter").style.color = `rgb(255,${Math.round(255 - 148 * k)},${Math.round(255 - 148 * k)})`;
-  show("s1b", t, 3.5, 5);
+  show("s1b", t, Math.max(3.5, L.hook * .62), E1);
 
   // Babak 2: masalah (5 – 9.5s)
-  show("s2a", t, 5.1, 9.5);
-  show("s2b", t, 6.3, 9.5);
-  show("s2c", t, 7.7, 9.5);
+  show("s2a", t, T_PROB + .1, T_FORM);
+  show("s2b", t, T_PROB + L.prob * .27, T_FORM);
+  show("s2c", t, T_PROB + L.prob * .58, T_FORM);
 
   // Babak 3: formula (9.5 – 12.5s)
-  show("s3a", t, 9.6, 12.4);
+  const F = T_FORM, FE = T0 - .1, fstep = Math.max(.2, (L.formula * .45) / 6);
+  show("s3a", t, F + .1, FE);
   B.forEach((_, i) => {
-    show("f" + i, t, 9.8 + i * .2, 12.4, { sc: .5, dy: 20, fi: .35 });
-    if (i < 5) show("fs" + i, t, 9.9 + i * .2, 12.4, { dy: 0, fi: .3 });
+    show("f" + i, t, F + .3 + i * fstep, FE, { sc: .5, dy: 20, fi: .35 });
+    if (i < 5) show("fs" + i, t, F + .4 + i * fstep, FE, { dy: 0, fi: .3 });
   });
-  show("s3b", t, 10.8, 12.4);
-  show("s3c", t, 11.3, 12.4);
+  show("s3b", t, F + Math.max(1.3, L.formula * .55), FE);
+  show("s3c", t, F + Math.max(1.8, L.formula * .72), FE);
 
   // Donut (12.3 – ringkasan tamat)
   const dEnd = T_TIP + .1;
-  show("hdr", t, 12.3, dEnd, { dy: -20 });
-  show("donut", t, 12.2, dEnd, { sc: .12, dy: 0, fi: .7 });
+  show("hdr", t, T0 - .2, dEnd, { dy: -20 });
+  show("donut", t, T0 - .3, dEnd, { sc: .12, dy: 0, fi: .7 });
   let active = -1;
   STARTS.forEach((s, i) => { if (t >= s && t < s + LENS[i]) active = i; });
   const summary = t >= T_SUM;
@@ -328,7 +333,7 @@ function render(t) {
     const s = STARTS[i], e = s + LENS[i];
     show("card" + i, t, s + .25, e, { dy: 60, fo: .35 });
     b.bul.forEach((_, j) => show(`b${i}_${j}`, t, s + .7 + j * .3, null, { dy: 16, fi: .35 }));
-    show("n" + i, t, s + 1.9, null, { dy: 16, sc: .05, fi: .4 });
+    show("n" + i, t, s + Math.max(1.9, LENS[i] * .5), null, { dy: 16, sc: .05, fi: .4 });
   });
 
   // Ringkasan
@@ -341,12 +346,12 @@ function render(t) {
   show("st2", t, T_TIP + 1.1, T_REAL, { dy: 30 });
   show("ar2", t, T_TIP + 1.5, T_REAL, { dy: -10 });
   show("st3", t, T_TIP + 1.7, T_REAL, { dy: 30 });
-  show("s7b", t, T_TIP + 2.4, T_REAL);
+  show("s7b", t, T_TIP + Math.max(2.4, L.tip * .55), T_REAL);
 
   // Realiti
   show("s8a", t, T_REAL + .1, T_CTA);
-  show("s8b", t, T_REAL + .9, T_CTA);
-  show("s8c", t, T_REAL + 1.8, T_CTA);
+  show("s8b", t, T_REAL + Math.max(.9, L.real * .3), T_CTA);
+  show("s8c", t, T_REAL + Math.max(1.8, L.real * .62), T_CTA);
 
   // CTA
   show("photo", t, T_CTA + .2, null, { sc: .15, dy: 0 });

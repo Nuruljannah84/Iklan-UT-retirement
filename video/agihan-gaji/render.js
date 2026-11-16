@@ -13,6 +13,13 @@ const page_url = "file://" + path.join(__dirname, "index.html") + "?render";
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+  // Jika voice/timing.json ada (dari voice/tts.py), babak dipanjangkan ikut audio
+  const timingFile = path.join(__dirname, "voice", "timing.json");
+  if (fs.existsSync(timingFile)) {
+    const timing = fs.readFileSync(timingFile, "utf8");
+    await page.addInitScript(`window.TIMING = ${timing};`);
+    console.log("Guna timing.json");
+  }
   await page.goto(page_url, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   const duration = await page.evaluate(() => window.DURATION);
@@ -30,10 +37,13 @@ const page_url = "file://" + path.join(__dirname, "index.html") + "?render";
   }
 
   const out = args[0] || path.join(__dirname, "agihan-gaji-50-10.mp4");
+  const voice = path.join(__dirname, "voice", "voiceover.m4a");
+  console.log(fs.existsSync(voice) ? "Guna voiceover.m4a" : "Tiada voiceover: trek senyap");
   const ff = spawn("ffmpeg", ["-y", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
-    "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+    ...(fs.existsSync(voice) ? ["-i", voice] : ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo"]),
+    "-map", "0:v", "-map", "1:a", "-af", "apad", "-t", String(duration),
     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", String(FPS),
-    "-c:a", "aac", "-shortest", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
+    "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
 
   const frames = Math.round(duration * FPS);
   for (let f = 0; f < frames; f++) {

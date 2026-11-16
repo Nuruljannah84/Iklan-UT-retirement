@@ -1,0 +1,15 @@
+[
+  {"id": "hook",    "text": "Gaji baru masuk... tapi tengah bulan, dah kosong?"},
+  {"id": "prob",    "text": "Selalunya, masalahnya bukan gaji kecil. Tapi duit kita tak ada alamat. Jom, bagi setiap ringgit, satu tugas."},
+  {"id": "formula", "text": "Guna formula lima puluh, sepuluh, sepuluh, sepuluh, sepuluh, sepuluh. Kira dari gaji bersih. Contohnya, empat ribu ringgit."},
+  {"id": "b0",      "text": "Lima puluh peratus, untuk komitmen. Dua ribu ringgit untuk pinjaman, bil, dan barang dapur. Kalau lebih lima puluh peratus, itu isyarat untuk susun semula hutang. Bukan tanda gagal."},
+  {"id": "b1",      "text": "Sepuluh peratus, untuk zakat dan sedekah. Tunaikan zakat pendapatan, bersedekah, dan rancang wasiat atau hibah."},
+  {"id": "b2",      "text": "Sepuluh peratus, untuk simpanan kecemasan. Sasarkan tiga hingga enam bulan perbelanjaan. Bila dah cukup, alihkan ke pelaburan."},
+  {"id": "b3",      "text": "Sepuluh peratus, untuk perlindungan takaful. Perubatan, penyakit kritikal, dan hibah. Ikut keperluan sebenar, bukan ikut-ikutan."},
+  {"id": "b4",      "text": "Sepuluh peratus, untuk pelaburan. Biar duit bekerja, dan kalahkan inflasi. Ini tambahan kepada KWSP anda."},
+  {"id": "b5",      "text": "Dan sepuluh peratus, untuk kehendak. Makan luar, hobi, self-care. Belanja tanpa rasa bersalah, sebab yang lain dah settle."},
+  {"id": "sum",     "text": "Jadi, dari empat ribu ringgit, setiap ringgit ada tugasnya."},
+  {"id": "tip",     "text": "Tipnya, bila gaji masuk, terus auto-transfer. Tunaikan kewajipan, dan bayar diri sendiri dulu. Belanja, kemudian."},
+  {"id": "real",    "text": "Ini panduan umum. Sesuaikan ikut pendapatan, tanggungan, dan matlamat anda."},
+  {"id": "cta",     "text": "Nak tahu agihan yang sesuai untuk anda? WhatsApp saya, untuk semakan kewangan percuma."}
+]

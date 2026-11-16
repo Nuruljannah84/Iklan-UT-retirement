@@ -8,6 +8,17 @@ Video menegak 1080x1920, 66 saat, untuk Reels / TikTok / Story. Tiada audio (tre
 | `index.html` | Sumber animasi. Buka dalam pelayar untuk pratonton |
 | `render.js` | Rakam semula: `node render.js` (perlu Playwright + ffmpeg) |
 
+## Suara latar (ElevenLabs)
+Skrip suara ada dalam `voice/script.json` (satu baris setiap babak). `voice/tts.py` menjana suara, memanjangkan babak video supaya muat dengan suara, dan menggabungkan audio.
+
+**Cara A, API (automatik):** simpan API key ElevenLabs sebagai network secret untuk `api.elevenlabs.io` (header `xi-api-key`), kemudian:
+```
+cd voice && python3 tts.py --voice <VOICE_ID> && cd .. && node render.js
+```
+**Cara B, manual:** jana setiap baris dalam `script.json` di laman ElevenLabs, simpan sebagai `voice/clips/<id>.mp3` (`hook.mp3`, `prob.mp3`, `formula.mp3`, `b0.mp3` … `b5.mp3`, `sum.mp3`, `tip.mp3`, `real.mp3`, `cta.mp3`), kemudian jalankan arahan yang sama tanpa `--voice`.
+
+Model asal `eleven_multilingual_v2`. Untuk sebutan Melayu, pilih suara Melayu dari Voice Library.
+
 ## Tukar kandungan
 Dalam `index.html`: `SALARY` (contoh gaji), senarai `B` (peratus, tajuk, poin, nota), dan teks CTA di bahagian `<!-- CTA -->`.
 
