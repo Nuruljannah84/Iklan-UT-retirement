@@ -2,3 +2,22 @@
 [build]
   publish = "."
   command = ""
+
+# Jangan terbitkan fail kerja dalaman (draf skrip video, projek Remotion, skill Claude).
+[[redirects]]
+  from = "/video/*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.claude/*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/skills-lock.json"
+  to = "/404"
+  status = 404
+  force = true
